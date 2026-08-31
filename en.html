@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Robin Fang — Getting AI Actually Used in Traditional Industries</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: '#0B0D0E',
+            inkLight: '#15181A',
+            paper: '#F5F0E8',
+            paperDim: '#C7C0B4',
+            cinnabar: '#A82222',
+            gold: '#D4B483',
+            goldDim: '#8C7353'
+          },
+          fontFamily: {
+            serif: ['"Noto Serif SC"', 'Georgia', 'serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif']
+          },
+          backgroundImage: {
+            'ink-radial': 'radial-gradient(ellipse at 30% 20%, rgba(212,180,131,0.08) 0%, transparent 60%)',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { background-color: #0B0D0E; color: #F5F0E8; font-family: 'Inter', system-ui, sans-serif; }
+    .font-serif-sc { font-family: 'Noto Serif SC', Georgia, serif; }
+    .text-balance { text-wrap: balance; }
+    .ink-sweep { position: relative; overflow: hidden; }
+    .ink-sweep::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(90deg, rgba(11,13,14,0.2) 0%, rgba(11,13,14,0.7) 55%, rgba(11,13,14,0.95) 100%);
+      pointer-events: none;
+    }
+    .card-hover { transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,.35); border-color: rgba(212,180,131,.35); }
+    .stat-num { font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+  </style>
+</head>
+<body class="antialiased selection:bg-cinnabar selection:text-white">
+
+  <!-- Nav -->
+  <nav class="fixed top-0 inset-x-0 z-50 bg-ink/80 backdrop-blur-md border-b border-white/5">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="#" class="font-serif-sc text-lg tracking-wide text-paper hover:text-gold transition-colors">Robin Fang</a>
+      <div class="hidden md:flex items-center gap-8 text-sm text-paperDim">
+        <a href="#about" class="hover:text-paper transition-colors">About</a>
+        <a href="#capability" class="hover:text-paper transition-colors">What I Do</a>
+        <a href="#numbers" class="hover:text-paper transition-colors">Numbers</a>
+        <a href="#experience" class="hover:text-paper transition-colors">Experience</a>
+        <a href="#thinking" class="hover:text-paper transition-colors">Thinking</a>
+        <a href="./index.html" class="hover:text-paper transition-colors">中文</a>
+        <a href="#contact" class="px-4 py-1.5 border border-gold/40 text-gold rounded-full hover:bg-gold/10 transition-colors">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="relative min-h-screen flex items-center ink-sweep">
+    <img src="./assets/hero-ink-universe.png" alt="" class="absolute inset-0 w-full h-full object-cover object-left opacity-90" />
+    <div class="absolute inset-0 bg-ink-radial"></div>
+    <div class="relative z-10 max-w-6xl mx-auto px-6 w-full pt-20">
+      <div class="max-w-2xl">
+        <p class="text-gold text-sm tracking-[0.2em] uppercase mb-4">Growth · BD · AI Adoption</p>
+        <h1 class="font-serif-sc text-5xl md:text-7xl font-bold leading-[1.1] text-balance mb-6">
+          Getting AI actually used<br/><span class="text-gold">in traditional industries</span>
+        </h1>
+        <p class="text-lg md:text-xl text-paperDim leading-relaxed max-w-xl mb-8">
+          Marketing background, no engineering degree.<br/>
+          What I'm good at is making people actually adopt it — building communities from zero, closing partnerships, and sitting on-site until the solution is sold into the real workflow.
+        </p>
+        <div class="flex flex-wrap items-center gap-4">
+          <a href="#numbers" class="px-6 py-3 bg-cinnabar text-white rounded-full text-sm font-medium hover:bg-cinnabar/90 transition-colors">See the numbers</a>
+          <a href="#contact" class="px-6 py-3 border border-white/20 rounded-full text-sm hover:bg-white/5 transition-colors">Email me</a>
+        </div>
+      </div>
+    </div>
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-paperDim/50 text-xs tracking-widest animate-bounce">SCROLL</div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="py-24 md:py-32 border-t border-white/5">
+    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-12 gap-12 items-center">
+      <div class="md:col-span-5">
+        <img src="./assets/growth-community.png" alt="Community growth" class="rounded-2xl opacity-90" />
+      </div>
+      <div class="md:col-span-7">
+        <p class="text-gold text-sm tracking-widest uppercase mb-2">About</p>
+        <h2 class="font-serif-sc text-3xl md:text-4xl font-bold mb-6">About me</h2>
+        <div class="space-y-5 text-paperDim text-lg leading-relaxed">
+          <p>Robin Fang — Marketing, Zhongnan University of Economics and Law.</p>
+          <p class="text-paper border-l-2 border-gold/50 pl-4 font-serif-sc text-xl">
+            I don't write code. I make AI products get used by real people.
+          </p>
+          <p>
+            Over the past two years I've applied this in three places: <span class="text-paper">AI open-source communities, AI adoption in traditional industries, and campus &amp; content growth.</span>
+          </p>
+          <p>
+            I don't position myself as technical. My value is being able to hear what the business is saying and what the product is saying — and make the two meet.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What I Do -->
+  <section id="capability" class="py-24 bg-inkLight/50 border-t border-white/5">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="mb-14">
+        <p class="text-gold text-sm tracking-widest uppercase mb-2">What I Do</p>
+        <h2 class="font-serif-sc text-3xl md:text-4xl font-bold">What I'm good at</h2>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="p-8 rounded-2xl border border-white/10 bg-white/[0.02] card-hover">
+          <div class="w-10 h-10 rounded-full bg-cinnabar/10 flex items-center justify-center mb-5 text-cinnabar">01</div>
+          <h3 class="font-serif-sc text-xl font-semibold mb-3">Community &amp; User Growth</h3>
+          <p class="text-paperDim leading-relaxed text-sm">Build communities from zero and turn strangers into repeat participants. Not with red packets, but with mechanism design.</p>
+        </div>
+        <div class="p-8 rounded-2xl border border-white/10 bg-white/[0.02] card-hover">
+          <div class="w-10 h-10 rounded-full bg-cinnabar/10 flex items-center justify-center mb-5 text-cinnabar">02</div>
+          <h3 class="font-serif-sc text-xl font-semibold mb-3">Business Development &amp; Sales</h3>
+          <p class="text-paperDim leading-relaxed text-sm">On-site discovery, deal negotiation, private-channel conversion. I can sit with the owner and dig into real pain points, and I can send out a one-page deck that gets a reply.</p>
+        </div>
+        <div class="p-8 rounded-2xl border border-white/10 bg-white/[0.02] card-hover">
+          <div class="w-10 h-10 rounded-full bg-cinnabar/10 flex items-center justify-center mb-5 text-cinnabar">03</div>
+          <h3 class="font-serif-sc text-xl font-semibold mb-3">Events &amp; Partnerships</h3>
+          <p class="text-paperDim leading-relaxed text-sm">Sponsorship deals, campus alliances, hundred-person events. Resources don't show up on their own; you go get them.</p>
+        </div>
+        <div class="p-8 rounded-2xl border border-white/10 bg-white/[0.02] card-hover">
+          <div class="w-10 h-10 rounded-full bg-cinnabar/10 flex items-center justify-center mb-5 text-cinnabar">04</div>
+          <h3 class="font-serif-sc text-xl font-semibold mb-3">Content Operations</h3>
+          <p class="text-paperDim leading-relaxed text-sm">A full pipeline for WeChat / Xiaohongshu / short video: topic → production → publishing → review, with standards and data gates at every step.</p>
+        </div>
+        <div class="p-8 rounded-2xl border border-white/10 bg-white/[0.02] card-hover md:col-span-2 lg:col-span-1">
+          <div class="w-10 h-10 rounded-full bg-cinnabar/10 flex items-center justify-center mb-5 text-cinnabar">05</div>
+          <h3 class="font-serif-sc text-xl font-semibold mb-3">Non-Technical Project Management</h3>
+          <p class="text-paperDim leading-relaxed text-sm">Leading technical teams without a technical background: translating fuzzy requirements into shippable products, turning a loose group into a team that delivers on cadence.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Numbers -->
+  <section id="numbers" class="py-24 border-t border-white/5">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="mb-14">
+        <p class="text-gold text-sm tracking-widest uppercase mb-2">Numbers</p>
+        <h2 class="font-serif-sc text-3xl md:text-4xl font-bold">By the numbers</h2>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-px bg-white/10 rounded-2xl overflow-hidden">
+        <div class="bg-ink p-8">
+          <div class="stat-num font-serif-sc text-4xl md:text-5xl font-bold text-gold mb-2">1,300<span class="text-2xl">+</span></div>
+          <div class="text-paperDim text-sm">members in the hackathon team-up community I built from zero — one of China's largest</div>
+        </div>
+        <div class="bg-ink p-8">
+          <div class="stat-num font-serif-sc text-4xl md:text-5xl font-bold text-gold mb-2">¥1.5<span class="text-2xl">M+</span></div>
+          <div class="text-paperDim text-sm">private-channel sales closed with my team, over target</div>
+        </div>
+        <div class="bg-ink p-8">
+          <div class="stat-num font-serif-sc text-4xl md:text-5xl font-bold text-gold mb-2">3,000<span class="text-2xl">+</span></div>
+          <div class="text-paperDim text-sm">cumulative private-channel prospects under management</div>
+        </div>
+        <div class="bg-ink p-8">
+          <div class="stat-num font-serif-sc text-4xl md:text-5xl font-bold text-gold mb-2">500<span class="text-2xl">/wk</span></div>
+          <div class="text-paperDim text-sm">core community built in a single week, 85% targeting accuracy</div>
+        </div>
+        <div class="bg-ink p-8">
+          <div class="stat-num font-serif-sc text-4xl md:text-5xl font-bold text-gold mb-2">50k<span class="text-2xl">+</span></div>
+          <div class="text-paperDim text-sm">impressions for a single campus AI hackathon</div>
+        </div>
+        <div class="bg-ink p-8">
+          <div class="stat-num font-serif-sc text-4xl md:text-5xl font-bold text-gold mb-2">30<span class="text-2xl">+</span></div>
+          <div class="text-paperDim text-sm">AI projects shipped on site during that event</div>
+        </div>
+        <div class="bg-ink p-8">
+          <div class="stat-num font-serif-sc text-4xl md:text-5xl font-bold text-gold mb-2">10<span class="text-2xl">+</span></div>
+          <div class="text-paperDim text-sm">university clubs and AI communities mobilized</div>
+        </div>
+        <div class="bg-ink p-8">
+          <div class="stat-num font-serif-sc text-4xl md:text-5xl font-bold text-gold mb-2">30<span class="text-2xl">%</span></div>
+          <div class="text-paperDim text-sm">operational efficiency gain at my on-site client</div>
+        </div>
+        <div class="bg-ink p-8">
+          <div class="stat-num font-serif-sc text-4xl md:text-5xl font-bold text-gold mb-2">100<span class="text-2xl">%</span></div>
+          <div class="text-paperDim text-sm">positive rating for my studio's first Steam release</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section id="experience" class="py-24 bg-inkLight/30 border-t border-white/5">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="mb-14 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+        <div>
+          <p class="text-gold text-sm tracking-widest uppercase mb-2">Experience</p>
+          <h2 class="font-serif-sc text-3xl md:text-4xl font-bold">Experience</h2>
+        </div>
+        <p class="text-paperDim/60 text-xs">Client and institution names are intentionally generic.</p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-6">
+        <!-- Exp 1 -->
+        <div class="p-8 rounded-2xl border border-white/10 bg-ink card-hover">
+          <div class="flex items-baseline justify-between mb-4">
+            <h3 class="font-serif-sc text-xl font-semibold">Leading Hackathon Team-Up Community</h3>
+            <span class="text-goldDim text-xs whitespace-nowrap ml-4">2026.07 – now</span>
+          </div>
+          <p class="text-gold/80 text-sm mb-5">Core Operator</p>
+          <ul class="space-y-3 text-paperDim text-sm leading-relaxed">
+            <li><span class="text-paper">Built from zero:</span> three communities targeting the "siloed circles, hard to find teammates" pain point. Now 1,300+ members.</li>
+            <li><span class="text-paper">Mechanism design:</span> intro relay → profile wall → tag-based icebreaking → free team formation. Materially better match quality.</li>
+            <li><span class="text-paper">Offline depth:</span> zero-commercial meetups — people traveled across cities through a typhoon. Post-event interviews feed back into operations.</li>
+            <li><span class="text-paper">Content assets:</span> Xiaohongshu and WeChat public account, compounding searchable public content.</li>
+          </ul>
+        </div>
+
+        <!-- Exp 2 -->
+        <div class="p-8 rounded-2xl border border-white/10 bg-ink card-hover">
+          <div class="flex items-baseline justify-between mb-4">
+            <h3 class="font-serif-sc text-xl font-semibold">Freight Forwarding Company in South China</h3>
+            <span class="text-goldDim text-xs whitespace-nowrap ml-4">2026.05 – now</span>
+          </div>
+          <p class="text-gold/80 text-sm mb-5">Project Partner (FDE)</p>
+          <ul class="space-y-3 text-paperDim text-sm leading-relaxed">
+            <li><span class="text-paper">On-site discovery:</span> mapped the freight forwarding workflow end to end to find where AI actually helps.</li>
+            <li><span class="text-paper">Workflow build-out:</span> AI workflows around core processes — 30% efficiency gain, more orders with the same headcount.</li>
+            <li><span class="text-paper">Closing the loop:</span> continuous iteration aligned with the business side; user feedback turned into shipped improvements.</li>
+            <li class="text-gold/70">First field validation of my own OPC-FDE (One Person Company × Forward Deployed Engineer) model.</li>
+          </ul>
+        </div>
+
+        <!-- Exp 3 -->
+        <div class="rounded-2xl border border-white/10 bg-ink card-hover overflow-hidden">
+          <div class="aspect-[16/7] overflow-hidden">
+            <img src="./assets/growth-hackathon.png" alt="Campus hackathon" class="w-full h-full object-cover opacity-80" />
+          </div>
+          <div class="p-8">
+            <div class="flex items-baseline justify-between mb-4">
+              <h3 class="font-serif-sc text-xl font-semibold">Douyin AI Innovators Campus Program</h3>
+              <span class="text-goldDim text-xs whitespace-nowrap ml-4">2026.04 – 05</span>
+            </div>
+            <p class="text-gold/80 text-sm mb-5">Site Lead</p>
+            <ul class="space-y-3 text-paperDim text-sm leading-relaxed">
+              <li><span class="text-paper">Ran it end to end:</span> launched the campus stop with a 10-person core team and delivered a hundred-person AI hackathon.</li>
+              <li><span class="text-paper">Partnerships:</span> closed exclusive platform sponsorship; mobilized 10+ university game and AI clubs across Wuhan.</li>
+              <li><span class="text-paper">Result:</span> 50,000+ impressions, 150+ signups, 30+ AI projects built on site.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Exp 4 -->
+        <div class="p-8 rounded-2xl border border-white/10 bg-ink card-hover">
+          <div class="flex items-baseline justify-between mb-4">
+            <h3 class="font-serif-sc text-xl font-semibold">Education Tech Company in Wuhan</h3>
+            <span class="text-goldDim text-xs whitespace-nowrap ml-4">2025.07 – 09</span>
+          </div>
+          <p class="text-gold/80 text-sm mb-5">Marketing Intern</p>
+          <ul class="space-y-3 text-paperDim text-sm leading-relaxed">
+            <li><span class="text-paper">Community from zero:</span> built a 500-person core community in one week at 85% targeting accuracy; scaled private channels past 3,000.</li>
+            <li><span class="text-paper">Activation &amp; conversion:</span> built the acquisition → nurture → conversion funnel; led the team to ¥1.5M+ in private-channel sales, over target.</li>
+          </ul>
+        </div>
+
+        <!-- Exp 5 -->
+        <div class="rounded-2xl border border-white/10 bg-ink card-hover overflow-hidden">
+          <div class="aspect-[16/7] overflow-hidden">
+            <img src="./assets/proj-fde.png" alt="Traditional industry digitization" class="w-full h-full object-cover opacity-80" />
+          </div>
+          <div class="p-8">
+            <div class="flex items-baseline justify-between mb-4">
+              <h3 class="font-serif-sc text-xl font-semibold">Indie Game Studio</h3>
+              <span class="text-goldDim text-xs whitespace-nowrap ml-4">2025.05 – now</span>
+            </div>
+            <p class="text-gold/80 text-sm mb-5">Co-founder</p>
+            <ul class="space-y-3 text-paperDim text-sm leading-relaxed">
+              <li><span class="text-paper">Cross-team delivery:</span> non-technical lead for an 8-person team; shipped a game from zero to Steam at 100% positive rating.</li>
+              <li><span class="text-paper">AI leverage:</span> built the AI production pipeline — +40% dev efficiency, −25% delivery cycle, −20% labor cost.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Exp 6 -->
+        <div class="p-8 rounded-2xl border border-white/10 bg-ink card-hover">
+          <div class="flex items-baseline justify-between mb-4">
+            <h3 class="font-serif-sc text-xl font-semibold">Also</h3>
+          </div>
+          <ul class="space-y-4 text-paperDim text-sm leading-relaxed">
+            <li>
+              <span class="text-paper">Early-stage VC firm · Partner Assistant</span><br/>
+              Sourced 60+ investor institutions; cut deal-matching cycle from 90 to 45 days.
+            </li>
+            <li>
+              <span class="text-paper">Fortune 500 healthcare company campus club · President</span><br/>
+              Supported a seven-figure fundraising process.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How I Work -->
+  <section class="py-24 border-t border-white/5">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="mb-14">
+        <p class="text-gold text-sm tracking-widest uppercase mb-2">How I Work</p>
+        <h2 class="font-serif-sc text-3xl md:text-4xl font-bold">How I work</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-x-12 gap-y-8">
+        <div>
+          <h3 class="font-serif-sc text-lg font-semibold mb-2">On site before slides</h3>
+          <p class="text-paperDim text-sm leading-relaxed">Off-site, you only see the workflow people want you to see.</p>
+        </div>
+        <div>
+          <h3 class="font-serif-sc text-lg font-semibold mb-2">Mechanisms over headcount</h3>
+          <p class="text-paperDim text-sm leading-relaxed">Team-up mechanics, content state machines, data gates. Let the system run; don't babysit it.</p>
+        </div>
+        <div>
+          <h3 class="font-serif-sc text-lg font-semibold mb-2">Baseline before ROI</h3>
+          <p class="text-paperDim text-sm leading-relaxed">Efficiency gains without a baseline are self-congratulation.</p>
+        </div>
+        <div>
+          <h3 class="font-serif-sc text-lg font-semibold mb-2">AI as a mirror, not a referee</h3>
+          <p class="text-paperDim text-sm leading-relaxed">Actively seek the opposing view on important calls.</p>
+        </div>
+        <div class="md:col-span-2">
+          <h3 class="font-serif-sc text-lg font-semibold mb-2">Non-technical is a bridge, not a gap</h3>
+          <p class="text-paperDim text-sm leading-relaxed">Connecting engineers and business, translating needs into product: that is the skill.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Thinking -->
+  <section id="thinking" class="py-24 bg-inkLight/50 border-t border-white/5">
+    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-12 gap-12 items-start">
+      <div class="md:col-span-5">
+        <p class="text-gold text-sm tracking-widest uppercase mb-2">Thinking</p>
+        <h2 class="font-serif-sc text-3xl md:text-4xl font-bold mb-4">What I'm thinking about</h2>
+        <p class="text-paperDim text-sm leading-relaxed mb-6">
+          Execution can be replaced. Judgment can't. This is where I differ from someone who is simply good with AI tools.
+        </p>
+        <img src="./assets/growth-content.png" alt="Content operations" class="rounded-2xl opacity-80" />
+      </div>
+      <div class="md:col-span-7 space-y-8">
+        <div class="border-l-2 border-gold/30 pl-5">
+          <h3 class="font-serif-sc text-lg font-semibold mb-2">The acquisition entry point is being rewritten</h3>
+          <p class="text-paperDim text-sm leading-relaxed">AI summaries now appear in 43% of search results, up from 15% in a year. The question is no longer "what rank am I" but "will the AI cite me."</p>
+        </div>
+        <div class="border-l-2 border-gold/30 pl-5">
+          <h3 class="font-serif-sc text-lg font-semibold mb-2">The value sits in the orchestration layer</h3>
+          <p class="text-paperDim text-sm leading-relaxed">Models will commoditize; the moat is orchestration, data, and workflows. That's why I bet on FDE, not on models.</p>
+        </div>
+        <div class="border-l-2 border-gold/30 pl-5">
+          <h3 class="font-serif-sc text-lg font-semibold mb-2">One-person companies aren't romantic — they're measurable</h3>
+          <p class="text-paperDim text-sm leading-relaxed">Analyzing 800k work-related messages, OpenAI found 43.5% of job-specific queries involve another occupation's work, densest at the marketing × engineering intersection — exactly the two capabilities a solo delivery unit needs.</p>
+        </div>
+        <div class="border-l-2 border-gold/30 pl-5">
+          <h3 class="font-serif-sc text-lg font-semibold mb-2">AI covers execution, not judgment</h3>
+          <p class="text-paperDim text-sm leading-relaxed">A solo operator's edge is client understanding, solution judgment, and trust — not "I can write all the code myself."</p>
+        </div>
+        <div class="border-l-2 border-gold/30 pl-5">
+          <h3 class="font-serif-sc text-lg font-semibold mb-2">Plan the acquisition model before you need it</h3>
+          <p class="text-paperDim text-sm leading-relaxed">Today it's on-site work, relationships, and a one-page deck — almost zero paid. At scale you need marketing mix modeling to measure real channel ROI, instead of assuming the last campaign that worked will keep working.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-24 border-t border-white/5">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <p class="text-gold text-sm tracking-widest uppercase mb-4">Contact</p>
+      <h2 class="font-serif-sc text-3xl md:text-5xl font-bold mb-6 text-balance">Let's get something real shipped</h2>
+      <p class="text-paperDim text-lg mb-10 max-w-xl mx-auto">
+        If you're putting AI into real operations and need someone who understands both the business and the product — or you just want to talk growth — reach out.
+      </p>
+      <a href="mailto:weiyangfang950@gmail.com" class="inline-block px-8 py-4 bg-cinnabar text-white rounded-full text-base font-medium hover:bg-cinnabar/90 transition-colors mb-10">
+        weiyangfang950@gmail.com
+      </a>
+      <div class="flex justify-center flex-wrap gap-6 text-paperDim text-sm">
+        <a href="https://github.com/Robin-fang611" target="_blank" class="hover:text-gold transition-colors">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-8 border-t border-white/5 text-center text-paperDim/40 text-xs tracking-wider">
+    Built with Agent · vibe-coded, zero hand-written lines.
+  </footer>
+
+</body>
+</html>

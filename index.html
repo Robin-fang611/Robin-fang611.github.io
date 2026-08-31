@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Robin 房 — 把 AI 用进传统行业的人</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: '#0B0D0E',
+            inkLight: '#15181A',
+            paper: '#F5F0E8',
+            paperDim: '#C7C0B4',
+            cinnabar: '#A82222',
+            gold: '#D4B483',
+            goldDim: '#8C7353'
+          },
+          fontFamily: {
+            serif: ['"Noto Serif SC"', 'serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif']
+          },
+          backgroundImage: {
+            'ink-radial': 'radial-gradient(ellipse at 30% 20%, rgba(212,180,131,0.08) 0%, transparent 60%)',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { background-color: #0B0D0E; color: #F5F0E8; font-family: 'Inter', system-ui, sans-serif; }
+    .font-serif-sc { font-family: 'Noto Serif SC', serif; }
+    .text-balance { text-wrap: balance; }
+    .ink-sweep { position: relative; overflow: hidden; }
+    .ink-sweep::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(90deg, rgba(11,13,14,0.2) 0%, rgba(11,13,14,0.7) 55%, rgba(11,13,14,0.95) 100%);
+      pointer-events: none;
+    }
+    .card-hover { transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,.35); border-color: rgba(212,180,131,.35); }
+    .tag { background: rgba(245,240,232,.06); border: 1px solid rgba(245,240,232,.12); }
+    .exp-line::before {
+      content: ""; position: absolute; left: 7px; top: 10px; bottom: -28px; width: 1px;
+      background: linear-gradient(to bottom, #D4B483, rgba(212,180,131,.15));
+    }
+    .exp-item:last-child .exp-line::before { display: none; }
+    .stat-num { font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+  </style>
+</head>
+<body class="antialiased selection:bg-cinnabar selection:text-white">
+
+  <!-- Nav -->
+  <nav class="fixed top-0 inset-x-0 z-50 bg-ink/80 backdrop-blur-md border-b border-white/5">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="#" class="font-serif-sc text-lg tracking-wide text-paper hover:text-gold transition-colors">Robin 房</a>
+      <div class="hidden md:flex items-center gap-8 text-sm text-paperDim">
+        <a href="#about" class="hover:text-paper transition-colors">关于</a>
+        <a href="#capability" class="hover:text-paper transition-colors">能力</a>
+        <a href="#numbers" class="hover:text-paper transition-colors">战绩</a>
+        <a href="#experience" class="hover:text-paper transition-colors">经历</a>
+        <a href="#thinking" class="hover:text-paper transition-colors">思考</a>
+        <a href="./en.html" class="hover:text-paper transition-colors">EN</a>
+        <a href="#contact" class="px-4 py-1.5 border border-gold/40 text-gold rounded-full hover:bg-gold/10 transition-colors">联系我</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="relative min-h-screen flex items-center ink-sweep">
+    <img src="./assets/hero-ink-universe.png" alt="" class="absolute inset-0 w-full h-full object-cover object-left opacity-90" />
+    <div class="absolute inset-0 bg-ink-radial"></div>
+    <div class="relative z-10 max-w-6xl mx-auto px-6 w-full pt-20">
+      <div class="max-w-2xl">
+        <p class="text-gold text-sm tracking-[0.2em] uppercase mb-4">Growth · BD · AI Adoption</p>
+        <h1 class="font-serif-sc text-5xl md:text-7xl font-bold leading-[1.1] text-balance mb-6">
+          把 AI 用进<br/><span class="text-gold">传统行业</span>的人
+        </h1>
+        <p class="text-lg md:text-xl text-paperDim leading-relaxed max-w-xl mb-8">
+          市场营销出身，非技术背景。<br/>
+          我擅长的是让人真的用起来——从 0 到 1 建社群、谈下资源、驻场把方案卖进真实业务里。
+        </p>
+        <div class="flex flex-wrap items-center gap-4">
+          <a href="#numbers" class="px-6 py-3 bg-cinnabar text-white rounded-full text-sm font-medium hover:bg-cinnabar/90 transition-colors">看我的战绩</a>
+          <a href="#contact" class="px-6 py-3 border border-white/20 rounded-full text-sm hover:bg-white/5 transition-colors">联系我</a>
+        </div>
+      </div>
+    </div>
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-paperDim/50 text-xs tracking-widest animate-bounce">SCROLL</div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="py-24 md:py-32 border-t border-white/5">
+    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-12 gap-12 items-center">
+      <div class="md:col-span-5">
+        <img src="./assets/growth-community.png" alt="社群增长" class="rounded-2xl opacity-90" />
+      </div>
+      <div class="md:col-span-7">
+        <p class="text-gold text-sm tracking-widest uppercase mb-2">About</p>
+        <h2 class="font-serif-sc text-3xl md:text-4xl font-bold mb-6">关于我</h2>
+        <div class="space-y-5 text-paperDim text-lg leading-relaxed">
+          <p>
+            Robin 房，中南财经政法大学市场营销专业。
+          </p>
+          <p class="text-paper border-l-2 border-gold/50 pl-4 font-serif-sc text-xl">
+            我不写代码，我负责让 AI 产品被真实用户用起来。
+          </p>
+          <p>
+            过去两年，我把这套能力用在三个场景：AI 开源社区、传统行业的 AI 落地、校园与内容的增长。
+          </p>
+          <p>
+            我不把自己定位成技术人员。我的价值在于——听得懂业务在说什么，也听得懂产品在说什么，然后把两边对上。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Capability -->
+  <section id="capability" class="py-24 bg-inkLight/50 border-t border-white/5">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="mb-14">
+        <p class="text-gold text-sm tracking-widest uppercase mb-2">What I Do</p>
+        <h2 class="font-serif-sc text-3xl md:text-4xl font-bold">我擅长什么</h2>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="p-8 rounded-2xl border border-white/10 bg-white/[0.02] card-hover">
+          <div class="w-10 h-10 rounded-full bg-cinnabar/10 flex items-center justify-center mb-5 text-cinnabar">01</div>
+          <h3 class="font-serif-sc text-xl font-semibold mb-3">社群与用户增长</h3>
+          <p class="text-paperDim leading-relaxed text-sm">从 0 到 1 搭社群，把一群陌生人变成持续参与者。不靠红包，靠机制设计。</p>
+        </div>
+        <div class="p-8 rounded-2xl border border-white/10 bg-white/[0.02] card-hover">
+          <div class="w-10 h-10 rounded-full bg-cinnabar/10 flex items-center justify-center mb-5 text-cinnabar">02</div>
+          <h3 class="font-serif-sc text-xl font-semibold mb-3">商务与销售</h3>
+          <p class="text-paperDim leading-relaxed text-sm">驻场调研、方案谈判、私域成交。能坐下来跟老板聊痛点，也能把一页纸的 BP 发出去换来回访。</p>
+        </div>
+        <div class="p-8 rounded-2xl border border-white/10 bg-white/[0.02] card-hover">
+          <div class="w-10 h-10 rounded-full bg-cinnabar/10 flex items-center justify-center mb-5 text-cinnabar">03</div>
+          <h3 class="font-serif-sc text-xl font-semibold mb-3">活动策划与资源联动</h3>
+          <p class="text-paperDim leading-relaxed text-sm">谈赞助、联动高校、操盘百人规模活动。资源不是等来的，是谈下来的。</p>
+        </div>
+        <div class="p-8 rounded-2xl border border-white/10 bg-white/[0.02] card-hover">
+          <div class="w-10 h-10 rounded-full bg-cinnabar/10 flex items-center justify-center mb-5 text-cinnabar">04</div>
+          <h3 class="font-serif-sc text-xl font-semibold mb-3">内容生产与分发</h3>
+          <p class="text-paperDim leading-relaxed text-sm">公众号 / 小红书 / 短视频的内容管线：选题 → 生产 → 发布 → 复盘，全部有标准、有数据闸门。</p>
+        </div>
+        <div class="p-8 rounded-2xl border border-white/10 bg-white/[0.02] card-hover md:col-span-2 lg:col-span-1">
+          <div class="w-10 h-10 rounded-full bg-cinnabar/10 flex items-center justify-center mb-5 text-cinnabar">05</div>
+          <h3 class="font-serif-sc text-xl font-semibold mb-3">非技术项目管理</h3>
+          <p class="text-paperDim leading-relaxed text-sm">非技术背景带技术团队，把模糊需求翻译成可交付的产品，把散兵游勇变成有节奏的交付。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Numbers -->
+  <section id="numbers" class="py-24 border-t border-white/5">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="mb-14">
+        <p class="text-gold text-sm tracking-widest uppercase mb-2">Numbers</p>
+        <h2 class="font-serif-sc text-3xl md:text-4xl font-bold">战绩数字</h2>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-px bg-white/10 rounded-2xl overflow-hidden">
+        <div class="bg-ink p-8">
+          <div class="stat-num font-serif-sc text-4xl md:text-5xl font-bold text-gold mb-2">1300<span class="text-2xl">+</span></div>
+          <div class="text-paperDim text-sm">人 · 从 0 到 1 搭建的黑客松组队社群，国内头部</div>
+        </div>
+        <div class="bg-ink p-8">
+          <div class="stat-num font-serif-sc text-4xl md:text-5xl font-bold text-gold mb-2">150<span class="text-2xl">万+</span></div>
+          <div class="text-paperDim text-sm">带领团队完成的私域客户端销售额，超额达标</div>
+        </div>
+        <div class="bg-ink p-8">
+          <div class="stat-num font-serif-sc text-4xl md:text-5xl font-bold text-gold mb-2">3000<span class="text-2xl">+</span></div>
+          <div class="text-paperDim text-sm">人 · 累计运营的私域潜在客户规模</div>
+        </div>
+        <div class="bg-ink p-8">
+          <div class="stat-num font-serif-sc text-4xl md:text-5xl font-bold text-gold mb-2">500<span class="text-2xl"> 人/周</span></div>
+          <div class="text-paperDim text-sm">单周建成的核心社群规模，精准度 85%</div>
+        </div>
+        <div class="bg-ink p-8">
+          <div class="stat-num font-serif-sc text-4xl md:text-5xl font-bold text-gold mb-2">5<span class="text-2xl">万+</span></div>
+          <div class="text-paperDim text-sm">次 · 单场校园 AI 黑客松活动曝光</div>
+        </div>
+        <div class="bg-ink p-8">
+          <div class="stat-num font-serif-sc text-4xl md:text-5xl font-bold text-gold mb-2">30<span class="text-2xl"> 件</span></div>
+          <div class="text-paperDim text-sm">单场活动现场产出的 AI 作品</div>
+        </div>
+        <div class="bg-ink p-8">
+          <div class="stat-num font-serif-sc text-4xl md:text-5xl font-bold text-gold mb-2">10<span class="text-2xl"> 所+</span></div>
+          <div class="text-paperDim text-sm">单场活动联动的高校社团与 AI 社区</div>
+        </div>
+        <div class="bg-ink p-8">
+          <div class="stat-num font-serif-sc text-4xl md:text-5xl font-bold text-gold mb-2">30<span class="text-2xl">%</span></div>
+          <div class="text-paperDim text-sm">驻场客户运营效率提升幅度</div>
+        </div>
+        <div class="bg-ink p-8">
+          <div class="stat-num font-serif-sc text-4xl md:text-5xl font-bold text-gold mb-2">100<span class="text-2xl">%</span></div>
+          <div class="text-paperDim text-sm">联合创办工作室首款游戏上线 Steam 的好评率</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section id="experience" class="py-24 bg-inkLight/30 border-t border-white/5">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="mb-14 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+        <div>
+          <p class="text-gold text-sm tracking-widest uppercase mb-2">Experience</p>
+          <h2 class="font-serif-sc text-3xl md:text-4xl font-bold">经历</h2>
+        </div>
+        <p class="text-paperDim/60 text-xs">客户与机构名称已做脱敏处理</p>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-6">
+        <!-- Exp 1 -->
+        <div class="p-8 rounded-2xl border border-white/10 bg-ink card-hover">
+          <div class="flex items-baseline justify-between mb-4">
+            <h3 class="font-serif-sc text-xl font-semibold">全国头部黑客松组队社群</h3>
+            <span class="text-goldDim text-xs whitespace-nowrap ml-4">2026.07 – 至今</span>
+          </div>
+          <p class="text-gold/80 text-sm mb-5">核心运营</p>
+          <ul class="space-y-3 text-paperDim text-sm leading-relaxed">
+            <li><span class="text-paper">从 0 到 1 搭建：</span>针对开发者 / 高校同学 / 创作者"圈层隔离、组队难"的痛点，搭建三大社群并持续运营，累计 1300+ 人。</li>
+            <li><span class="text-paper">机制设计：</span>建立"线上接龙自我介绍 → 名片大屏滚动展示 → 标签破冰 → 自由组队参赛"流程，显著提升组队效率与匹配质量。</li>
+            <li><span class="text-paper">线下深度链接：</span>发起零商业性质的线下见面会，台风天仍有人跨城赶来；活动后做深度访谈收集真话反馈。</li>
+            <li><span class="text-paper">内容资产：</span>运营小红书与微信公众号，持续沉淀可被搜索到的公开内容。</li>
+          </ul>
+        </div>
+
+        <!-- Exp 2 -->
+        <div class="p-8 rounded-2xl border border-white/10 bg-ink card-hover">
+          <div class="flex items-baseline justify-between mb-4">
+            <h3 class="font-serif-sc text-xl font-semibold">华南某国际货运代理公司</h3>
+            <span class="text-goldDim text-xs whitespace-nowrap ml-4">2026.05 – 至今</span>
+          </div>
+          <p class="text-gold/80 text-sm mb-5">项目制合伙人（FDE）</p>
+          <ul class="space-y-3 text-paperDim text-sm leading-relaxed">
+            <li><span class="text-paper">驻场调研：</span>通过访谈与线上调研梳理货运代理基础工作流程，识别多环节可借 AI 提效的真实痛点。</li>
+            <li><span class="text-paper">工作流搭建：</span>围绕核心业务流程搭建 AI 基础工作流，帮助企业效率提升 30%，同等人力下可多接订单。</li>
+            <li><span class="text-paper">闭环推进：</span>持续迭代系统并与业务方对齐合作方案，把用户反馈转化为可交付的产品改进。</li>
+            <li class="text-gold/70">这是我自己提出的 OPC-FDE（一人公司 × 前置部署工程师）模式的首个实地验证场景。</li>
+          </ul>
+        </div>
+
+        <!-- Exp 3 -->
+        <div class="rounded-2xl border border-white/10 bg-ink card-hover overflow-hidden">
+          <div class="aspect-[16/7] overflow-hidden">
+            <img src="./assets/growth-hackathon.png" alt="校园黑客松" class="w-full h-full object-cover opacity-80" />
+          </div>
+          <div class="p-8">
+            <div class="flex items-baseline justify-between mb-4">
+              <h3 class="font-serif-sc text-xl font-semibold">抖音 AI 创变者计划校园赛</h3>
+              <span class="text-goldDim text-xs whitespace-nowrap ml-4">2026.04 – 05</span>
+            </div>
+            <p class="text-gold/80 text-sm mb-5">站点负责人</p>
+            <ul class="space-y-3 text-paperDim text-sm leading-relaxed">
+              <li><span class="text-paper">独立操盘：</span>落地本校站点，组建 10 人核心团队，策划并执行百人规模校园 AI 黑客松。</li>
+              <li><span class="text-paper">资源联动：</span>谈下平台独家赞助，联动武汉 10+ 高校游戏社团与 AI 社区。</li>
+              <li><span class="text-paper">结果：</span>活动曝光超 5 万次，报名 150+，现场产出 30+ 件 AI 作品。</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Exp 4 -->
+        <div class="p-8 rounded-2xl border border-white/10 bg-ink card-hover">
+          <div class="flex items-baseline justify-between mb-4">
+            <h3 class="font-serif-sc text-xl font-semibold">武汉某教育科技公司</h3>
+            <span class="text-goldDim text-xs whitespace-nowrap ml-4">2025.07 – 09</span>
+          </div>
+          <p class="text-gold/80 text-sm mb-5">市场营销实习</p>
+          <ul class="space-y-3 text-paperDim text-sm leading-relaxed">
+            <li><span class="text-paper">社群从 0 到 1：</span>单周建成 500 人、精准度 85% 的核心社群；精细化运营累计私域规模突破 3000 人。</li>
+            <li><span class="text-paper">活跃与转化：</span>体系化输出内容维持日活，搭建"引流 → 培育 → 转化"链路，带领团队完成私域端销售 150 万+，超额达标。</li>
+          </ul>
+        </div>
+
+        <!-- Exp 5 -->
+        <div class="rounded-2xl border border-white/10 bg-ink card-hover overflow-hidden">
+          <div class="aspect-[16/7] overflow-hidden">
+            <img src="./assets/proj-fde.png" alt="传统行业数字化" class="w-full h-full object-cover opacity-80" />
+          </div>
+          <div class="p-8">
+            <div class="flex items-baseline justify-between mb-4">
+              <h3 class="font-serif-sc text-xl font-semibold">独立游戏工作室</h3>
+              <span class="text-goldDim text-xs whitespace-nowrap ml-4">2025.05 – 至今</span>
+            </div>
+            <p class="text-gold/80 text-sm mb-5">联合创始人</p>
+            <ul class="space-y-3 text-paperDim text-sm leading-relaxed">
+              <li><span class="text-paper">跨团队落地：</span>非技术背景带 8 人团队，负责项目管理与协调，完成游戏从 0 到 1 开发并上线 Steam，好评率 100%。</li>
+              <li><span class="text-paper">AI 提效：</span>牵头搭建 AI 游戏研发管线，研发效率提升 40%、交付周期缩短 25%、人力成本下降 20%。</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Exp 6 -->
+        <div class="p-8 rounded-2xl border border-white/10 bg-ink card-hover">
+          <div class="flex items-baseline justify-between mb-4">
+            <h3 class="font-serif-sc text-xl font-semibold">其他</h3>
+          </div>
+          <ul class="space-y-4 text-paperDim text-sm leading-relaxed">
+            <li>
+              <span class="text-paper">某早期投资机构 · 合伙人助理</span><br/>
+              拓展投资机构 60+，项目对接周期由 90 天压缩至 45 天。
+            </li>
+            <li>
+              <span class="text-paper">某世界 500 强医疗企业校园俱乐部 · 主席</span><br/>
+              协助完成百万级融资对接。
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How I Work -->
+  <section class="py-24 border-t border-white/5">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="mb-14">
+        <p class="text-gold text-sm tracking-widest uppercase mb-2">How I Work</p>
+        <h2 class="font-serif-sc text-3xl md:text-4xl font-bold">我的方法</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-x-12 gap-y-8">
+        <div>
+          <h3 class="font-serif-sc text-lg font-semibold mb-2">先驻场，再谈方案</h3>
+          <p class="text-paperDim text-sm leading-relaxed">不到现场，看到的都是别人想让你看到的流程。</p>
+        </div>
+        <div>
+          <h3 class="font-serif-sc text-lg font-semibold mb-2">用机制代替人力</h3>
+          <p class="text-paperDim text-sm leading-relaxed">组队机制、内容状态机、数据闸门，让系统自己转，而不是靠人盯。</p>
+        </div>
+        <div>
+          <h3 class="font-serif-sc text-lg font-semibold mb-2">先量基线，再谈 ROI</h3>
+          <p class="text-paperDim text-sm leading-relaxed">没有基线的「效率提升」都是自嗨。</p>
+        </div>
+        <div>
+          <h3 class="font-serif-sc text-lg font-semibold mb-2">把 AI 当镜子，不当裁判</h3>
+          <p class="text-paperDim text-sm leading-relaxed">关键判断主动求反方意见，不顺言。</p>
+        </div>
+        <div class="md:col-span-2">
+          <h3 class="font-serif-sc text-lg font-semibold mb-2">非技术是桥梁，不是短板</h3>
+          <p class="text-paperDim text-sm leading-relaxed">连接开发者与业务方、把需求翻译成产品，这本身就是核心能力。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Thinking -->
+  <section id="thinking" class="py-24 bg-inkLight/50 border-t border-white/5">
+    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-12 gap-12 items-start">
+      <div class="md:col-span-5">
+        <p class="text-gold text-sm tracking-widest uppercase mb-2">Thinking</p>
+        <h2 class="font-serif-sc text-3xl md:text-4xl font-bold mb-4">我在思考什么</h2>
+        <p class="text-paperDim text-sm leading-relaxed mb-6">
+          执行力可以被替代，判断力不行。这一块是我和"会用 AI 工具的人"的分界线。
+        </p>
+        <img src="./assets/growth-content.png" alt="内容运营" class="rounded-2xl opacity-80" />
+      </div>
+      <div class="md:col-span-7 space-y-8">
+        <div class="border-l-2 border-gold/30 pl-5">
+          <h3 class="font-serif-sc text-lg font-semibold mb-2">获客入口正在换底层</h3>
+          <p class="text-paperDim text-sm leading-relaxed">AI 搜索结果页的出现率一年内从 15% 涨到 43%，用户在点进链接之前问题就被回答了。竞争维度从「我排第几」变成「AI 会不会引用我」。</p>
+        </div>
+        <div class="border-l-2 border-gold/30 pl-5">
+          <h3 class="font-serif-sc text-lg font-semibold mb-2">AI 应用的价值在编排层</h3>
+          <p class="text-paperDim text-sm leading-relaxed">模型会商品化，护城河在编排、数据与工作流。这也是我押 FDE 而非押模型的原因。</p>
+        </div>
+        <div class="border-l-2 border-gold/30 pl-5">
+          <h3 class="font-serif-sc text-lg font-semibold mb-2">一人公司不是情怀，是有数据的</h3>
+          <p class="text-paperDim text-sm leading-relaxed">OpenAI 分析 80 万条工作相关消息后发现，43.5% 的岗位查询在干另一个职业的活，交叉最密的正好是营销与工程——这两项恰好是单人做数字化交付最需要的能力。</p>
+        </div>
+        <div class="border-l-2 border-gold/30 pl-5">
+          <h3 class="font-serif-sc text-lg font-semibold mb-2">AI 顶执行，不顶判断</h3>
+          <p class="text-paperDim text-sm leading-relaxed">单人的不可替代性应该押在客户业务理解、方案判断、关系信任上，而不是「我能一个人写完代码」。</p>
+        </div>
+        <div class="border-l-2 border-gold/30 pl-5">
+          <h3 class="font-serif-sc text-lg font-semibold mb-2">获客方式要提前想清楚</h3>
+          <p class="text-paperDim text-sm leading-relaxed">目前靠驻场 + 关系 + 一页纸 BP，几乎零付费；一旦要规模化，就得用营销组合建模去测每个渠道的真实 ROI，避免「上一波投了有用就一直加钱」的线性误判。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-24 border-t border-white/5">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <p class="text-gold text-sm tracking-widest uppercase mb-4">Contact</p>
+      <h2 class="font-serif-sc text-3xl md:text-5xl font-bold mb-6 text-balance">一起做点实事</h2>
+      <p class="text-paperDim text-lg mb-10 max-w-xl mx-auto">
+        如果你在做 AI 落地、需要一个懂业务也懂产品的人去推，或者只是想聊聊增长，欢迎找我。
+      </p>
+      <a href="mailto:weiyangfang950@gmail.com" class="inline-block px-8 py-4 bg-cinnabar text-white rounded-full text-base font-medium hover:bg-cinnabar/90 transition-colors mb-10">
+        weiyangfang950@gmail.com
+      </a>
+      <div class="flex justify-center flex-wrap gap-6 text-paperDim text-sm">
+        <a href="https://github.com/Robin-fang611" target="_blank" class="hover:text-gold transition-colors">GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-8 border-t border-white/5 text-center text-paperDim/40 text-xs tracking-wider">
+    Built with Agent · vibe-coded, zero hand-written lines.
+  </footer>
+
+  <script>
+    const els = document.querySelectorAll('.card-hover, section > div');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    els.forEach(el => { el.classList.add('reveal'); io.observe(el); });
+  </script>
+</body>
+</html>
