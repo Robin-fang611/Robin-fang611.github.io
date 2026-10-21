@@ -71,6 +71,10 @@
     dialog.addEventListener("close", () => openBtn.focus());
   }
 
+  /* ---------- 打印 ---------- */
+  const printBtn = $("[data-print]");
+  if (printBtn) printBtn.addEventListener("click", () => window.print());
+
   /* ---------- 复制邮箱（失败则退回 mailto） ---------- */
   const copyBtn = $("[data-copy]");
   const status = $(".copy-status");

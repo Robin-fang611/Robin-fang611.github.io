@@ -972,7 +972,23 @@ footer { position: relative; z-index: 1; }
   gap: var(--s2) var(--s5);
 }
 
-.footer a { color: var(--on-dark); }
+.footer a,
+.footer .link-btn {
+  color: var(--on-dark);
+  text-decoration: underline;
+  text-underline-offset: .3em;
+  text-decoration-color: var(--dark-line);
+}
+
+.footer .link-btn:hover { text-decoration-color: var(--on-dark); }
+
+.footer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s2) var(--s5);
+}
+
+.no-js .link-btn { display: none; }
 
 /* ---------- 响应式 ---------- */
 @media (max-width: 1179px) {

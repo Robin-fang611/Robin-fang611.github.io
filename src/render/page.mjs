@@ -266,7 +266,10 @@ function footer(L) {
   <div class="wrap footer-in">
     <p>${esc(t(f.rights, L))}</p>
     <p>${esc(t(site.ui.volume, L))} RB-2026 · ${esc(t(site.ui.updated, L))} ${site.updated} · ${esc(t(site.ui.footerNote, L))}</p>
-    <p><a href="${site.links.github}/Robin-fang611.github.io" target="_blank" rel="noopener">${esc(t(f.source, L))}${arrow}</a></p>
+    <p class="footer-actions">
+      <button class="link-btn" type="button" data-print>${esc(t(site.ui.print, L))}</button>
+      <a href="${site.links.github}/Robin-fang611.github.io" target="_blank" rel="noopener">${esc(t(f.source, L))}${arrow}</a>
+    </p>
   </div>
 </footer>`;
 }
