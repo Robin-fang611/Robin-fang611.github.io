@@ -297,7 +297,8 @@ export function renderPage(L) {
     url: site.url,
     email: `mailto:${site.email}`,
     jobTitle: L === "zh" ? "AI 产品与增长" : "AI product & growth",
-    alumniOf: { "@type": "CollegeOrUniversity", name: "中南财经政法大学" },
+    affiliation: { "@type": "CollegeOrUniversity", name: "中南财经政法大学" },
+    knowsAbout: ["AI delivery", "community building", "growth", "indie games"],
     sameAs: Object.values(site.links),
   };
 
@@ -328,7 +329,7 @@ export function renderPage(L) {
 <body>
 <a class="skip" href="#main">${esc(t(site.ui.skip, L))}</a>
 ${topbar(L, alt)}
-<main id="main">
+<main id="main" tabindex="-1">
   <div class="wrap page">
     ${rail(L)}
     <div class="col">

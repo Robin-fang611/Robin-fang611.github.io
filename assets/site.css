@@ -364,6 +364,8 @@ footer { position: relative; z-index: 1; }
 
 .lang:hover { color: var(--accent); }
 
+.no-js .toc-btn { display: none; }
+
 .toc-btn {
   display: none;
   align-items: center;

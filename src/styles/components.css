@@ -152,6 +152,8 @@
 
 .lang:hover { color: var(--accent); }
 
+.no-js .toc-btn { display: none; }
+
 .toc-btn {
   display: none;
   align-items: center;
