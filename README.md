@@ -74,6 +74,7 @@ GitHub Pages 从 `main` 分支根目录发布：
 ## 文档
 
 - `docs/product.md` — 苏格拉底式盘问、命题、信息架构、内容规则
+- `docs/profile-readme-rationale.md` — GitHub Profile README 的苏格拉底式整理
 - `docs/design-system.md` — token、组件、状态、动效、无障碍
 - `docs/decisions/` — 6 条 ADR
 - `docs/reviews/` — 评审记录与并排对比
