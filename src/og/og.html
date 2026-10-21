@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<style>
+  @page { size: 1200px 630px; margin: 0; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; width: 1200px; height: 630px; }
+  body {
+    background: #F4F0E7;
+    color: #1C262E;
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+    padding: 80px 88px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+  body::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(28, 38, 46, .05) 0.6px, transparent 0.6px);
+    background-size: 7px 7px;
+    pointer-events: none;
+  }
+  .top { display: flex; align-items: center; gap: 20px; }
+  .seal {
+    width: 56px; height: 56px; display: grid; place-items: center;
+    background: #9B3A2C; color: #FBF6EC; border-radius: 2px;
+    font-family: "Songti SC", STSong, serif; font-size: 34px; font-weight: 700;
+    transform: rotate(-3deg);
+  }
+  .meta { color: #5E686D; font-size: 20px; letter-spacing: .12em; }
+  h1 {
+    margin: 0;
+    font-family: "Songti SC", STSong, "Noto Serif SC", serif;
+    font-weight: 700;
+    font-size: 82px;
+    line-height: 1.14;
+    letter-spacing: -.01em;
+    max-width: 780px;
+  }
+  .line { position: relative; display: inline-block; }
+  .line svg { position: absolute; left: -1%; bottom: -.14em; width: 102%; height: .2em; overflow: visible; }
+  .line path { stroke: #9B3A2C; stroke-width: 5; fill: none; stroke-linecap: round; }
+  .foot { display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; position: relative; z-index: 2; }
+  .who { color: #3A464F; font-size: 23px; line-height: 1.55; margin: 0; }
+  .who b { color: #1C262E; font-weight: 600; }
+  .url { color: #5E686D; font-size: 19px; letter-spacing: .04em; margin: 0; }
+  .bigseal {
+    position: absolute; right: 96px; top: 150px;
+    width: 208px; height: 208px;
+    display: grid; place-items: center;
+    background: #9B3A2C; color: #FBF6EC;
+    border-radius: 2px;
+    font-family: "Songti SC", STSong, serif;
+    font-size: 128px; font-weight: 700; line-height: 1;
+    transform: rotate(-4deg);
+  }
+</style>
+</head>
+<body>
+  <div class="top">
+    <span class="seal">房</span>
+    <span class="meta">卷宗 RB-2026 · 更新 2026.10</span>
+  </div>
+
+  <h1>把 AI 带到<br /><span class="line">业务发生的地方<svg viewBox="0 0 600 24" preserveAspectRatio="none" aria-hidden="true"><path d="M4 17 C 150 7, 430 6, 596 13" /></svg></span></h1>
+
+  <div class="foot">
+    <p class="who"><b>房钰斌 Robin</b><br />合伙人 · 社群共建 · 独立游戏</p>
+    <p class="url">robin-fang611.github.io</p>
+  </div>
+
+  <span class="bigseal">房</span>
+</body>
+</html>

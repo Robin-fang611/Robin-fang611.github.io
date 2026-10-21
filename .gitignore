@@ -1,2 +1,12 @@
 content.md
 .DS_Store
+
+# 本地预览 / 构建
+out/
+node_modules/
+tools/frontend-review/node_modules/
+tools/frontend-review/out/
+
+# 评审器截图（assets 里的静态图需要提交）
+*.png
+!assets/*.png

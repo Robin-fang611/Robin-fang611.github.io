@@ -1,670 +1,433 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
+<!doctype html>
+<html lang="zh-CN" class="no-js">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Robin 房 — 把 AI 用进传统行业的人</title>
-<meta name="description" content="Robin 房（房钰斌）· 云天远略合伙人 · FDE / AI 社群 / 游戏。把 Agentic 能力带进真实企业与营销场景。"/>
-<style>
-/* ============ 设计令牌：宣纸为底（暖），蓝为骨，紫为唯一点缀 ============ */
-:root{
-  --paper:#F2EEE6; --paper2:#EDE9DE; --paper3:#EAE5D8;
-  --ink:#2E3A45; --ink-deep:#22303F; --navy:#3D5A73; --blue:#8FA8BF;
-  --line:rgba(61,90,115,.16); --purple:#7E6FA6; --purple-deep:#6A5B91;
-  --dark1:#232B33; --dark2:#181F26; --ondark:#D9E1EB; --ondark-mut:#8CA0B5;
-  --ease:cubic-bezier(0.16,1,0.3,1);
-}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:auto} /* 平滑滚动交给 Lenis */
-body{
-  background:var(--paper); color:var(--ink);
-  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Segoe UI",sans-serif;
-  -webkit-font-smoothing:antialiased; overflow-x:hidden;
-}
-::selection{background:rgba(126,111,166,.28)}
-.kai{font-family:"LXGW WenKai","Kaiti SC","STKaiti",serif}
-.playfair{font-family:"Playfair Display",Georgia,serif}
-.mono{font-family:"IBM Plex Mono","SF Mono",Menlo,monospace}
-
-/* 宣纸颗粒（暖调） */
-body::before{
-  content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.28 0 0 0 0 0.25 0 0 0 0 0.20 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-main{position:relative;z-index:2}
-
-/* ============ 顶部进度墨线 / 导航 / 章节点 ============ */
-#progress{position:fixed;top:0;left:0;height:2px;width:0;z-index:99;
-  background:linear-gradient(90deg,var(--blue),var(--purple))}
-#progress::after{content:"";position:absolute;right:-3px;top:-2px;width:6px;height:6px;
-  border-radius:50%;background:var(--purple);box-shadow:0 0 8px rgba(126,111,166,.8)}
-nav{position:fixed;top:0;left:0;right:0;z-index:50;backdrop-filter:blur(10px);
-  background:rgba(242,238,230,.66);border-bottom:1px solid var(--line)}
-.nav-in{max-width:1200px;margin:0 auto;padding:0 32px;height:64px;
-  display:flex;align-items:center}
-.nav-logo{font-size:19px;color:var(--navy);text-decoration:none;letter-spacing:.05em}
-.nav-links{display:flex;gap:32px;font-size:13.5px;margin-left:56px;margin-right:auto}
-.nav-links a{color:#5F6E6B;text-decoration:none;transition:color .15s}
-.nav-links a:hover{color:var(--purple-deep)}
-.nav-cta{margin-left:32px;font-size:13px;color:var(--navy);text-decoration:none;border:1px solid var(--navy);
-  border-radius:999px;padding:7px 18px;transition:all .2s var(--ease)}
-.nav-cta:hover{background:var(--navy);color:#F2EEE6}
-#dots{position:fixed;right:22px;top:50%;transform:translateY(-50%);z-index:40;
-  display:flex;flex-direction:column;gap:14px}
-#dots a{width:7px;height:7px;border-radius:50%;background:#C9C2B2;transition:all .25s var(--ease)}
-#dots a.on{background:var(--purple);transform:scale(1.5);box-shadow:0 0 0 4px rgba(126,111,166,.15)}
-
-/* ============ eyebrow / 通用 ============ */
-.eyebrow{display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.28em;
-  text-transform:uppercase;color:var(--navy);font-weight:600}
-.eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--purple);flex:none}
-.wrap{max-width:1200px;margin:0 auto;padding:120px 32px}
-.sec-head{display:grid;grid-template-columns:180px 1fr;gap:32px;align-items:start;margin-bottom:64px}
-.sec-idx{font-size:clamp(72px,7vw,110px);line-height:1;color:transparent;
-  -webkit-text-stroke:1px rgba(61,90,115,.35);font-weight:700}
-.sec-title{font-size:clamp(34px,4vw,52px);color:var(--ink-deep);margin-top:14px;font-weight:700}
-.sec-label{font-size:12px;letter-spacing:.28em;color:#8CA0B5;text-transform:uppercase;margin-top:10px}
-
-/* ============ HERO（钉住场景）============ */
-#heroZone{height:210vh;position:relative}
-#heroPin{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center}
-.hero-in{max-width:1200px;margin:0 auto;padding:0 32px;width:100%;position:relative;z-index:2}
-.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:40px;align-items:center}
-h1.giant{font-size:clamp(56px,8.6vw,118px);line-height:1.12;color:var(--ink-deep);
-  font-weight:700;margin:26px 0 30px;letter-spacing:.01em;position:relative}
-.hero-underline{position:relative;display:inline-block}
-.hero-underline svg{position:absolute;left:-2%;bottom:-.08em;width:104%;height:.28em;overflow:visible}
-.hero-underline path{stroke:url(#inkgrad);stroke-width:10;fill:none;stroke-linecap:round;
-  stroke-dasharray:620;stroke-dashoffset:620;filter:blur(.5px);opacity:.85;
-    animation:draw 1.5s var(--ease) .7s forwards}
-@keyframes draw{to{stroke-dashoffset:0}}
-.hero-sub{font-size:20px;line-height:1.9;color:#5E6B60;max-width:34em}
-.hero-sub strong{color:var(--ink);font-weight:600}
-.caps{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
-.cap{font-size:12.5px;color:var(--navy);border:1px solid var(--line);background:rgba(255,255,255,.5);
-  border-radius:999px;padding:7px 15px;display:inline-flex;align-items:center;gap:8px}
-.cap::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--blue)}
-.hero-actions{display:flex;gap:14px;margin-top:44px;align-items:center}
-.btn-ghost{font-size:14.5px;color:var(--ink-deep);text-decoration:none;border:1px solid var(--navy);
-  padding:14px 30px;border-radius:999px;transition:all .25s var(--ease)}
-.btn-ghost:hover{background:var(--ink-deep);color:#F2EEE6;transform:translateY(-2px)}
-.btn-text{font-size:14.5px;color:var(--navy);text-decoration:none;display:inline-flex;
-  align-items:center;gap:8px;transition:gap .2s var(--ease),color .2s}
-.btn-text:hover{color:var(--purple-deep);gap:14px}
-/* 水墨圆环 */
-.enso{position:relative;width:320px;height:320px;justify-self:end}
-.enso svg{width:100%;height:100%;overflow:visible}
-.enso .vtext{position:absolute;right:-30px;top:50%;transform:translateY(-50%);
-  writing-mode:vertical-rl;font-size:13px;letter-spacing:.5em;color:#9A9482}
-.scroll-hint{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
-  display:flex;flex-direction:column;align-items:center;gap:10px;color:#9A9482;font-size:11px;letter-spacing:.3em}
-.scroll-hint i{width:1px;height:44px;background:linear-gradient(var(--blue),transparent);display:block;
-  animation:breathe 2.6s ease-in-out infinite}
-@keyframes breathe{0%,100%{opacity:.25}50%{opacity:.9}}
-
-/* ============ 阶梯帘转场（hero → 关于）============ */
-#sweep{height:260vh;position:relative}
-#sweepPin{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;
-  align-items:center;justify-content:center}
-.panels{position:absolute;inset:0;display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(3,1fr)}
-.panels i{transform:scale(0);background:var(--paper2);border:1px solid rgba(61,90,115,.05)}
-.panels i:nth-child(6n+1),.panels i:nth-child(6n+4){background:var(--paper3)}
-.panels i:nth-child(6n+3){background:#EFEBE0}
-.sweep-head{position:relative;z-index:3;text-align:center;opacity:0}
-.sweep-head .eyebrow{justify-content:center}
-.sweep-head h2{font-size:clamp(44px,6vw,84px);color:var(--ink-deep);margin-top:18px}
-
-/* ============ 区块通用（透明底，由页面底色分场）============ */
-section,footer{position:relative}
-.belt{border-block:1px solid var(--line);background:rgba(255,255,255,.28);overflow:hidden;padding:18px 0}
-.belt-track{display:flex;gap:64px;width:max-content;animation:slide 46s linear infinite}
-.belt span{font-size:14px;color:#8A8676;white-space:nowrap;display:flex;align-items:center;gap:64px}
-.belt span::after{content:"·";color:var(--blue)}
-@keyframes slide{to{transform:translateX(-50%)}}
-
-/* ---------- 关于 ---------- */
-.about-grid{display:grid;grid-template-columns:7fr 5fr;gap:80px}
-.bigquote{font-size:clamp(28px,3.2vw,42px);line-height:1.7;color:var(--ink-deep);
-  border-left:3px solid var(--purple);padding-left:34px}
-.about-txt p{font-size:16.5px;line-height:2;color:#5E6B60;margin-bottom:22px}
-.about-txt p b{color:var(--ink)}
-.tracks{display:grid;gap:14px;margin-top:36px}
-.track{display:grid;grid-template-columns:56px 1fr;gap:18px;padding:20px 22px;
-  background:rgba(255,255,255,.55);border:1px solid var(--line);border-radius:16px;
-  transition:transform .3s var(--ease),border-color .3s}
-.track:hover{transform:translateY(-3px);border-color:var(--purple)}
-.track i{font-style:normal;font-size:22px;color:#B9B29E;font-weight:700}
-.track h4{font-size:16px;color:var(--ink-deep);margin-bottom:4px}
-.track p{font-size:13.5px;color:#8A8676;line-height:1.7;margin:0}
-
-/* ---------- 战绩 ---------- */
-.stats{display:grid;grid-template-columns:repeat(3,1fr)}
-.stat{padding:42px 34px;border:0 solid var(--line)}
-.stat:nth-child(n){border-bottom-width:1px;border-right-width:1px}
-.stat:nth-child(3n){border-right-width:0}
-.stat:nth-child(n+7){border-bottom-width:0}
-.stat .num{font-size:clamp(44px,4.6vw,68px);color:var(--navy);line-height:1;font-weight:700}
-.stat .num small{font-size:.42em;color:#9A9482;margin-left:2px}
-.stat.hot .num{color:var(--purple)}
-.stat p{font-size:13.5px;color:#8A8676;margin-top:14px;line-height:1.7}
-
-/* ---------- 经历 ---------- */
-.xp{display:grid;grid-template-columns:150px 1fr;gap:28px;padding:44px 0;
-  border-top:1px solid var(--line);transition:background .3s}
-.xp:last-child{border-bottom:1px solid var(--line)}
-.xp:hover{background:rgba(143,168,191,.07)}
-.xp-when{font-size:13px;color:#9A9482;padding-top:6px}
-.xp-when b{display:block;color:var(--navy);font-size:15px;font-weight:600;margin-bottom:6px}
-.xp h3{font-size:22px;color:var(--ink-deep);margin-bottom:4px}
-.xp .role{font-size:13.5px;color:var(--purple-deep);margin-bottom:16px}
-.xp ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px 36px}
-.xp li{font-size:14px;color:#5E6B60;line-height:1.8;padding-left:16px;position:relative}
-.xp li::before{content:"";position:absolute;left:0;top:.75em;width:6px;height:1.5px;background:var(--blue)}
-.xp-chap{display:flex;align-items:center;gap:16px;margin:52px 0 2px}
-.xp-chap i{font-style:normal;font-size:12px;letter-spacing:.3em;color:var(--purple-deep);text-transform:uppercase;font-weight:600}
-.xp-chap span{font-size:14.5px;color:#8A8676}
-.xp-chap::after{content:"";flex:1;height:1px;background:var(--line)}
-
-/* ---------- 合作与生态 ---------- */
-.eco-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-bottom:80px}
-.eco-card{background:rgba(255,255,255,.5);border:1px solid var(--line);border-radius:20px;
-  padding:44px 40px;position:relative;overflow:hidden;transition:transform .3s var(--ease)}
-.eco-card:hover{transform:translateY(-4px)}
-.eco-card::after{content:"";position:absolute;right:-60px;top:-60px;width:180px;height:180px;
-  border-radius:50%;background:radial-gradient(circle,rgba(126,111,166,.12),transparent 70%)}
-.eco-card .tag{font-size:12px;letter-spacing:.22em;color:var(--purple-deep);text-transform:uppercase}
-.eco-card h3{font-size:30px;color:var(--ink-deep);margin:12px 0 2px}
-.eco-card .role{font-size:13.5px;color:#9A9482;margin-bottom:20px}
-.eco-card p{font-size:15px;line-height:1.95;color:#5E6B60}
-/* ---------- 校内 ---------- */
-.campus-line{font-size:clamp(22px,2.6vw,32px);line-height:1.9;color:var(--ink-deep);max-width:26em}
-.campus-line em{font-style:normal;color:var(--purple-deep)}
-
-/* ---------- 我的方法（格言横卷 · 亮场）---------- */
-.way{display:grid;grid-template-columns:120px 1fr;gap:34px;align-items:baseline;
-  padding:46px 0;border-bottom:1px solid var(--line)}
-.ways .way:last-child{border-bottom:0}
-.way .no{font-size:clamp(40px,4.5vw,64px);line-height:1;color:transparent;
-  -webkit-text-stroke:1px rgba(61,90,115,.4);font-weight:700;transition:all .35s var(--ease)}
-.way:hover .no{color:var(--purple);-webkit-text-stroke-color:var(--purple);transform:translateX(6px)}
-.way h3{font-size:clamp(30px,4vw,54px);color:var(--ink-deep);font-weight:700;line-height:1.35}
-.way h3 em{font-style:normal;color:var(--purple-deep)}
-.way p{margin-top:14px;font-size:15.5px;color:#5E6B60;max-width:36em;line-height:2}
-
-/* ---------- 思考 ---------- */
-.thinks{display:grid;grid-template-columns:1fr 1fr;gap:0 70px}
-.think{padding:34px 0;border-top:1px solid var(--line)}
-.think h3{font-size:20px;color:var(--ink-deep);margin-bottom:10px;display:flex;gap:12px;align-items:baseline}
-.think h3 i{font-style:normal;font-size:13px;color:var(--purple)}
-.think p{font-size:14.5px;color:#5E6B60;line-height:1.95}
-
-/* ---------- 联系 ---------- */
-#contact .wrap{padding-bottom:80px}
-.contact-giant{font-size:clamp(48px,7vw,96px);color:var(--ink-deep);line-height:1.25;margin:20px 0 30px;position:relative;display:inline-block}
-.contact-sub{font-size:17px;color:#5E6B60;line-height:2;max-width:34em;margin-bottom:46px}
-.btn-solid{display:inline-block;font-size:15.5px;color:#F2EEE6;text-decoration:none;
-  background:var(--purple);padding:18px 44px;border-radius:999px;transition:all .25s var(--ease)}
-.btn-solid:hover{background:var(--purple-deep);transform:translateY(-2px);
-  box-shadow:0 12px 32px rgba(126,111,166,.35)}
-.contact-mail{display:block;margin-top:26px;font-size:15px;color:var(--navy);text-decoration:none}
-.contact-mail:hover{color:var(--purple-deep)}
-footer{border-top:1px solid var(--line);padding:28px 0;text-align:center;
-  font-size:12px;color:#B0AA98;letter-spacing:.1em}
-
-/* ---------- 入场：缓·轻·晕 ---------- */
-.rv{opacity:0;transform:translateY(14px);
-  transition:opacity .8s var(--ease) var(--d,0s),transform .8s var(--ease) var(--d,0s)}
-.rv.in{opacity:1;transform:none}
-
-/* ---------- 鼠标墨迹（拖尾）---------- */
-.trail{position:fixed;top:0;left:0;border-radius:50%;pointer-events:none;z-index:98;
-  mix-blend-mode:multiply;opacity:0;will-change:transform}
-
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation:none!important;transition:none!important}
-  .rv{opacity:1;transform:none}
-  .trail{display:none}
-  #heroPin,#sweepPin{position:static;height:auto}
-  #heroZone,#sweep{height:auto}
-  .panels i{transform:none}
-}
-@media (max-width:900px){
-  .nav-links{display:none}
-  .hero-grid,.about-grid,.eco-grid,.thinks{grid-template-columns:1fr}
-  .stats{grid-template-columns:repeat(2,1fr)}
-  .sec-head{grid-template-columns:1fr}
-  .xp{grid-template-columns:1fr}
-  .xp ul{grid-template-columns:1fr}
-  .enso{display:none}
-  #dots{display:none}
-}
-</style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>房钰斌 Robin · 把 AI 带到业务发生的地方</title>
+<meta name="description" content="市场营销出身、不写代码的 AI 原生构建者。驻场把 AI 做进货代的报价与单证流程，发起 1,700+ 人的黑客松组队社群，联合创办独立游戏工作室。" />
+<link rel="canonical" href="https://robin-fang611.github.io/" />
+<link rel="alternate" hreflang="zh-CN" href="https://robin-fang611.github.io/" />
+<link rel="alternate" hreflang="en" href="https://robin-fang611.github.io/en/" />
+<link rel="alternate" hreflang="x-default" href="https://robin-fang611.github.io/" />
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+<meta property="og:type" content="profile" />
+<meta property="og:title" content="房钰斌 Robin · 把 AI 带到业务发生的地方" />
+<meta property="og:description" content="市场营销出身、不写代码的 AI 原生构建者。驻场把 AI 做进货代的报价与单证流程，发起 1,700+ 人的黑客松组队社群，联合创办独立游戏工作室。" />
+<meta property="og:url" content="https://robin-fang611.github.io/" />
+<meta property="og:locale" content="zh_CN" />
+<meta property="og:image" content="https://robin-fang611.github.io/assets/og.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="theme-color" content="#F4F0E7" />
+<link rel="stylesheet" href="/assets/site.css" />
+<script>document.documentElement.classList.replace("no-js","js");</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"房钰斌","alternateName":"Robin Fang","url":"https://robin-fang611.github.io","email":"mailto:weiyangfang950@gmail.com","jobTitle":"AI 产品与增长","alumniOf":{"@type":"CollegeOrUniversity","name":"中南财经政法大学"},"sameAs":["https://github.com/Robin-fang611","https://www.xiaohongshu.com/user/profile/685b590b000000001b021d86","https://www.douyin.com/user/self?from_tab_name=main","https://space.bilibili.com/1340728968","https://x.com/Robin126988"]}</script>
 </head>
 <body>
-
-<div id="progress"></div>
-<nav>
-  <div class="nav-in">
-    <a class="nav-logo kai" href="#top">Robin 房</a>
-    <div class="nav-links">
-      <a href="#about">关于</a><a href="#numbers">战绩</a><a href="#exp">经历</a>
-      <a href="#eco">合作</a><a href="#think">思考</a>
-      <a href="./en.html" style="color:#B0AA98">EN</a>
-    </div>
-    <a class="nav-cta" href="#contact">联系我</a>
-  </div>
-</nav>
-<div id="dots">
-  <a href="#heroZone"></a><a href="#about"></a><a href="#numbers"></a><a href="#exp"></a>
-  <a href="#eco"></a><a href="#way"></a><a href="#think"></a><a href="#contact"></a>
-</div>
-
-<main id="top">
-  <!-- ============ HERO · 钉住 ============ -->
-  <div id="heroZone">
-    <section id="heroPin">
-      <div class="hero-in">
-        <div class="hero-grid">
-          <div id="heroCopy">
-            <p class="eyebrow rv">FDE · AI Community · Game Dev</p>
-            <h1 class="giant kai rv" style="--d:.1s">把 AI 用进<br/>
-              <span class="hero-underline">传统行业
-                <svg viewBox="0 0 600 60" preserveAspectRatio="none" aria-hidden="true">
-                  <defs><linearGradient id="inkgrad" x1="0" y1="0" x2="1" y2="0">
-                    <stop offset="0" stop-color="#8FA8BF"/><stop offset="1" stop-color="#7E6FA6"/>
-                  </linearGradient></defs>
-                  <path d="M8 42 C 130 18, 300 14, 592 30"/>
-                </svg></span>的人
-            </h1>
-            <p class="hero-sub rv" style="--d:.2s">市场营销出身，非技术背景，财大营销大三在读。<br/>
-              我擅长让人真的用起来——<strong>驻场把方案卖进业务，从 0 到 1 建开发者社群</strong>，兴趣爱好是做 AI 游戏。</p>
-            <div class="caps rv" style="--d:.3s">
-              <span class="cap">Realize 具现</span><span class="cap">Linkathon</span>
-              <span class="cap">云天远略</span><span class="cap">大隆盛游戏</span><span class="cap">1600+ 人社群</span>
-            </div>
-            <div class="hero-actions rv" style="--d:.4s">
-              <a class="btn-ghost" href="#numbers">看战绩</a>
-              <a class="btn-text" href="#eco">合作与生态 →</a>
-            </div>
-          </div>
-          <div class="enso rv" style="--d:.35s" id="enso">
-            <svg viewBox="0 0 200 200" aria-hidden="true">
-              <defs><radialGradient id="ensoFill" cx="35%" cy="30%">
-                <stop offset="0" stop-color="#A9BFD4" stop-opacity=".55"/>
-                <stop offset=".65" stop-color="#8FA8BF" stop-opacity=".28"/>
-                <stop offset="1" stop-color="#7E6FA6" stop-opacity=".16"/>
-              </radialGradient></defs>
-              <circle cx="100" cy="100" r="82" fill="none" stroke="url(#ensoFill)" stroke-width="17"
-                stroke-linecap="round" stroke-dasharray="440 80" transform="rotate(-56 100 100)"
-                style="filter:blur(1.6px)"/>
-              <circle cx="100" cy="100" r="60" fill="none" stroke="#C9C2B2" stroke-width="1" stroke-dasharray="2 7"/>
-            </svg>
-            <span class="vtext kai">知行合一 · 事上磨练</span>
-          </div>
-        </div>
-      </div>
-      <div class="scroll-hint"><i></i>SCROLL</div>
-    </section>
-  </div>
-
-  <!-- ============ 阶梯帘转场 ============ -->
-  <div id="sweep">
-    <div id="sweepPin">
-      <div class="panels" id="panels"></div>
-      <div class="sweep-head" id="sweepHead">
-        <p class="eyebrow">About</p>
-        <h2 class="kai">先认识一下这个人</h2>
-      </div>
+<a class="skip" href="#main">跳到正文</a>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="#cover">
+      <span class="seal seal-xs" aria-hidden="true">房</span>
+      <span class="brand-name">房钰斌 <em>Robin</em></span>
+    </a>
+    <div class="topbar-actions">
+      <button class="toc-btn" type="button" aria-haspopup="dialog" aria-controls="toc-dialog">
+        目录
+      </button>
+      <a class="lang" href="/en/" hreflang="en" lang="en"
+        aria-label="切换到英文版">EN</a>
+      <a class="btn btn-sm" href="#contact">联系</a>
     </div>
   </div>
-
-  <!-- ============ 关于 ============ -->
-  <section id="about">
-    <div class="wrap">
-      <div class="sec-head rv">
-        <div class="sec-idx playfair">01</div>
-        <div><div class="sec-title kai">关于我</div><div class="sec-label">About</div></div>
-      </div>
-      <div class="about-grid">
-        <div class="bigquote kai rv">我不写代码，<br/>我负责让 AI 产品<br/>被真实用户用起来。</div>
-        <div class="about-txt">
-          <p class="rv"><b>Robin 房</b>，中南财经政法大学市场营销专业，2028 届，现大三。云天远略（深圳）合伙人，把 Agentic 能力带进真实企业；校园里是 FMA 金融协会前会长、AI 转型发起人。</p>
-          <p class="rv" style="--d:.1s">我不把自己定位成技术人员。我的价值在于——<b>听得懂业务在说什么，也听得懂产品在说什么，然后把两边对上</b>，同时打通高校生态关系。</p>
-          <div class="tracks">
-            <div class="track rv" style="--d:.15s"><i class="playfair">1</i>
-              <div><h4>FDE · 云天远略</h4><p>合伙人；累计 4 个物流场景的垂直 FDE 项目已落地。</p></div></div>
-            <div class="track rv" style="--d:.25s"><i class="playfair">2</i>
-              <div><h4>AI 社群 · 1600+ 人</h4><p>Realize 具现 × Linkathon 发起人。</p></div></div>
-            <div class="track rv" style="--d:.35s"><i class="playfair">3</i>
-              <div><h4>游戏 · 大隆盛</h4><p>联创首款作品《浮华工造·千机百炼》Steam 好评率 100%，玩家 2500+，新作《昨日重现》抖音黑客松 top30。</p></div></div>
-          </div>
-        </div>
+  <div class="progress" aria-hidden="true"><i></i></div>
+</header>
+<main id="main">
+  <div class="wrap page">
+    <aside class="rail">
+  <nav aria-label="章节目录">
+    <ol class="toc">
+      <li><a href="#summary" data-toc="summary">01 摘要</a></li>
+      <li><a href="#evidence" data-toc="evidence">02 证据</a></li>
+      <li><a href="#record" data-toc="record">03 履历</a></li>
+      <li><a href="#ecosystem" data-toc="ecosystem">04 生态</a></li>
+      <li><a href="#method" data-toc="method">05 方法</a></li>
+      <li><a href="#questions" data-toc="questions">06 议题</a></li>
+      <li><a href="#contact" data-toc="contact">07 联系</a></li>
+    </ol>
+  </nav>
+</aside>
+    <div class="col">
+      <section class="cover" id="cover" aria-labelledby="cover-title">
+  <p class="docmeta"><span>卷宗 RB-2026</span><span>更新 2026.10</span><span>武汉 / 深圳</span></p>
+  <p class="label">AI 落地 · 社群 · 游戏</p>
+  <h1 id="cover-title">把 AI 带到<br /><span class="ink">业务发生的地方<svg class="ink-line" viewBox="0 0 600 24" preserveAspectRatio="none" aria-hidden="true"><path d="M4 17 C 150 7, 430 6, 596 13" /></svg></span></h1>
+  <p class="lede">我是房钰斌（Robin），市场营销出身，一行代码都不会手写。过去两年只做一件事：站到业务现场，用 AI 把最耗人的环节做掉——货代的报价台、黑客松的组队群、游戏的上线页。</p>
+  <ul class="facts">
+    <li>云天远略（深圳）· 合伙人</li>
+    <li>Linkathon · 早期共建者（1,700+ 人）</li>
+    <li>大隆盛游戏 · 联合创始人</li>
+  </ul>
+  <div class="actions">
+    <a class="btn" href="#summary">看三份证据</a>
+    <a class="link" href="#contact">约 20 分钟聊聊<span class="arrow" aria-hidden="true">→</span></a>
+  </div>
+  <span class="seal seal-lg" aria-hidden="true">房</span>
+</section>
+      <section class="sec" id="summary" aria-labelledby="summary-title">
+  <header class="sec-head">
+    <span class="seal seal-sm" aria-hidden="true">01</span>
+    <h2 id="summary-title">摘要</h2>
+    <p class="sec-kicker">三份证据。不是「我做过什么」，是「我解决了什么、结果是多少、谁在用它」。</p>
+  </header>
+  <div class="cases"><article class="case">
+    <div class="case-body">
+      <p class="case-org">华南某国际货代 · 驻场交付（已脱敏）</p>
+      <h3>货代报价与单证系统</h3>
+      <div class="case-lines">
+        <p><b>问题：</b>报价靠人翻表格，单证靠人复粘，一天几百封邮件。</p>
+        <p><b>做法：</b>驻场六周梳理全流程，先做报价与单证两个最耗人的环节，上线后跟着业务继续改。</p>
+        <p><b>结果：</b>运营效率提升 30%，同等人力可以多接订单；系统进入日常使用。</p>
       </div>
     </div>
-  </section>
-
-  <!-- 伙伴传送带 -->
-  <div class="belt" aria-hidden="true">
-    <div class="belt-track">
-      <span>Realize 具现</span><span>Linkathon</span>
-      <span>Datawhale</span><span>武汉开源聚变人工智能研究院</span><span>模态空间</span><span>观猹</span>
-      <span>Realize 具现</span><span>Linkathon</span>
-      <span>Datawhale</span><span>武汉开源聚变人工智能研究院</span><span>模态空间</span><span>观猹</span>
+    <div class="case-metric">
+      <strong>+30%</strong>
+      <span>客户运营效率</span>
+    </div>
+    <p class="source">出处 · 客户项目 · 2026.08 结项 · 客户口径</p>
+  </article>
+<article class="case">
+    <div class="case-body">
+      <p class="case-org">发起人 · 零投流</p>
+      <h3>Linkathon 黑客松组队社群</h3>
+      <div class="case-lines">
+        <p><b>问题：</b>想打黑客松的人，找不到队友。</p>
+        <p><b>做法：</b>把组队做成机制：接龙自我介绍 → 标签破冰 → 自由组队；再用最笨的人工运营把机制跑起来。</p>
+        <p><b>结果：</b>1,700+ 人，国内同类头部；零商业的线下见面会，台风天仍有人跨城到场。</p>
+      </div>
+    </div>
+    <div class="case-metric">
+      <strong>1,700+</strong>
+      <span>社群成员</span>
+    </div>
+    <p class="source">出处 · 社群统计 · 2026.10</p>
+  </article>
+<article class="case">
+    <div class="case-body">
+      <p class="case-org">联合创始人 · 非技术带队</p>
+      <h3>大隆盛游戏 · 首作上线 Steam</h3>
+      <div class="case-lines">
+        <p><b>问题：</b>八个人的小团队，没有人有发行经验，要做出一款能上线的游戏。</p>
+        <p><b>做法：</b>搭 AI 研发管线（剧情 / 关卡 / 美术 / 程序），把项目管理压到一个人能扛。</p>
+        <p><b>结果：</b>首作 2025.06 上线 Steam：4 章 20 关、四语版本，100% 好评（10 篇评测，样本有限）。新作《昨日重现》进入抖音黑客松 top30。</p>
+      </div>
+    </div>
+    <div class="case-metric">
+      <strong>100%</strong>
+      <span>Steam 好评率（样本有限）</span>
+    </div>
+    <p class="source">出处 · <a href="https://store.steampowered.com/app/3724560/" target="_blank" rel="noopener">Steam 商店页 · 2026.09 复核</a></p>
+  </article></div>
+</section>
+      <section class="sec" id="evidence" aria-labelledby="evidence-title">
+  <header class="sec-head">
+    <span class="seal seal-sm" aria-hidden="true">02</span>
+    <h2 id="evidence-title">证据</h2>
+    <p class="sec-kicker">六条数字，每条都带口径和时间。没有出处的数字不上这张表。</p>
+  </header>
+  <ol class="metrics">
+    <li class="metric">
+      <p class="metric-value">1,700+</p>
+      <p class="metric-label">Linkathon 社群成员，零投流</p>
+      <p class="source">出处 · 社群统计 · 2026.10</p>
+    </li>
+    <li class="metric">
+      <p class="metric-value">400</p>
+      <p class="metric-label">3 天做到 400 人，零投流</p>
+      <p class="source">出处 · 社群增长记录 · 2026.07</p>
+    </li>
+    <li class="metric">
+      <p class="metric-value">+30%</p>
+      <p class="metric-label">驻场客户运营效率</p>
+      <p class="source">出处 · 客户项目 · 2026.08</p>
+    </li>
+    <li class="metric">
+      <p class="metric-value">832</p>
+      <p class="metric-label">美食地图上线收录商户（快照）</p>
+      <p class="source">出处 · <a href="https://github.com/Robin-fang611/wuhan-food-map" target="_blank" rel="noopener">wuhan-food-map · 2026.08 快照</a></p>
+    </li>
+    <li class="metric">
+      <p class="metric-value">150 万+</p>
+      <p class="metric-label">实习期团队私域 GMV</p>
+      <p class="source">出处 · 同创教育 · 2025.09 · 本人记录</p>
+    </li>
+    <li class="metric">
+      <p class="metric-value">8 人</p>
+      <p class="metric-label">非技术背景带队的游戏团队规模</p>
+      <p class="source">出处 · 大隆盛游戏 · 2026</p>
+    </li>
+  </ol>
+</section>
+      <section class="sec" id="record" aria-labelledby="record-title">
+  <header class="sec-head">
+    <span class="seal seal-sm" aria-hidden="true">03</span>
+    <h2 id="record-title">履历</h2>
+    <p class="sec-kicker">四章，按「在哪解决什么问题」排，不按时间平铺。</p>
+  </header>
+  <div class="chapter"><h3 class="chapter-title"><span class="chapter-n">I</span>企业交付 · 驻场</h3><ol class="entries"><li class="entry">
+    <p class="entry-when">2026 – 至今</p>
+    <h4 class="entry-org">云天远略（深圳）</h4>
+    <p class="entry-role">合伙人</p>
+    <ul class="points">
+      <li>以驻场合伙人的形态，把 AI 能力带进客户的真实业务与营销场景。</li>
+      <li>客户是 40 人级的货代公司，没有技术团队；系统上线后进入日常使用。</li>
+    </ul>
+  </li>
+<li class="entry">
+    <p class="entry-when">2026.05 – 08</p>
+    <h4 class="entry-org">华南某国际货代</h4>
+    <p class="entry-role">项目制合作 · 驻场交付</p>
+    <ul class="points">
+      <li>梳理报价、单证全流程，系统上线后进入日常使用。</li>
+      <li>运营效率提升 30%，同等人力可多接订单。</li>
+    </ul>
+  </li></ol></div>
+<div class="chapter"><h3 class="chapter-title"><span class="chapter-n">II</span>社群与生态</h3><ol class="entries"><li class="entry">
+    <p class="entry-when">2026.07 – 至今</p>
+    <h4 class="entry-org">Linkathon</h4>
+    <p class="entry-role">早期共建者</p>
+    <ul class="points">
+      <li>三大圈层 1,700+ 人：3 天 400 人、4 周 1,000 人、三个月 1,700+，零投流。</li>
+      <li>接龙 → 标签破冰 → 自由组队的机制流水线；零商业线下见面会。</li>
+    </ul>
+  </li>
+<li class="entry">
+    <p class="entry-when">2026 – 至今</p>
+    <h4 class="entry-org">Realize 具现</h4>
+    <p class="entry-role">发起人 · 武汉主理人</p>
+    <ul class="points">
+      <li>武汉发起、辐射全国的 AI 活动与资源对接平台，不绑定单一高校。</li>
+      <li>财大 AI 社团作为校内落地端口，正在筹备。</li>
+    </ul>
+  </li>
+<li class="entry">
+    <p class="entry-when">2026.04 – 05</p>
+    <h4 class="entry-org">抖音校园 AI 创变者计划 · 校园赛</h4>
+    <p class="entry-role">站点负责人</p>
+    <ul class="points">
+      <li>独立操盘百人校园黑客松，谈下平台独家赞助。</li>
+      <li>联动武汉 10+ 高校社团，曝光 5 万+，现场产出 30+ 件作品。</li>
+    </ul>
+  </li></ol></div>
+<div class="chapter"><h3 class="chapter-title"><span class="chapter-n">III</span>游戏</h3><ol class="entries"><li class="entry">
+    <p class="entry-when">2025.05 – 至今</p>
+    <h4 class="entry-org">大隆盛游戏</h4>
+    <p class="entry-role">联合创始人</p>
+    <ul class="points">
+      <li>非技术背景带 8 人团队，首作《浮华工造·千机百炼》上线 Steam。</li>
+      <li>搭 AI 研发管线：研发效率 +40%，交付周期 -25%。</li>
+      <li>新作《昨日重现》以阿尔茨海默照护为题，进入抖音黑客松 top30。</li>
+    </ul>
+  </li></ol></div>
+<details class="chapter chapter-details">
+      <summary><h3 class="chapter-title"><span class="chapter-n">IV</span>早期与校园</h3><span class="plus" aria-hidden="true"></span></summary>
+      <ol class="entries"><li class="entry">
+    <p class="entry-when">2025.07 – 09</p>
+    <h4 class="entry-org">武汉同创教育（金领学社）</h4>
+    <p class="entry-role">市场营销实习</p>
+    <ul class="points">
+      <li>单周建成 500 人、精准度 85% 的核心社群，私域累计 3,000+。</li>
+      <li>设计「引流 → 培育 → 转化」链路，团队私域 GMV 150 万+。</li>
+    </ul>
+  </li>
+<li class="entry">
+    <p class="entry-when">2025.06 – 08</p>
+    <h4 class="entry-org">苏州丛蓉零点壹号创投</h4>
+    <p class="entry-role">合伙人助理</p>
+    <ul class="points">
+      <li>从 0 搭建社媒项目池获取体系，拓展 60+ 早期 AI 项目。</li>
+      <li>项目对接周期从 90 天压缩到 45 天。</li>
+    </ul>
+  </li>
+<li class="entry">
+    <p class="entry-when">2024.09 – 2028.06</p>
+    <h4 class="entry-org">中南财经政法大学 · 市场营销</h4>
+    <p class="entry-role">本科在读 · 2028 届</p>
+    <ul class="points">
+      <li>FMA 国际金融管理协会上届会长，任内推动协会的 AI 转型。</li>
+      <li>中国国际大学生创新大赛国家级银奖（AI 生涯规划平台产品设计）。</li>
+    </ul>
+  </li>
+<li class="entry">
+    <p class="entry-when">2025 – 2026</p>
+    <h4 class="entry-org">世界 500 强校园俱乐部</h4>
+    <p class="entry-role">主席</p>
+    <ul class="points">
+      <li>统筹路演、对接 10+ 投资机构；主导撰写政府侧申报材料与商业计划书。</li>
+      <li>支撑项目完成 100 万元天使轮融资。</li>
+    </ul>
+  </li></ol>
+    </details>
+</section>
+      <section class="sec" id="ecosystem" aria-labelledby="ecosystem-title">
+  <header class="sec-head">
+    <span class="seal seal-sm" aria-hidden="true">04</span>
+    <h2 id="ecosystem-title">生态</h2>
+    <p class="sec-kicker">我在哪些组织里、以什么身份出现。客户与机构已按约定脱敏。</p>
+  </header>
+  <ul class="roles">
+    <li class="role">
+      <h3>云天远略（深圳）</h3>
+      <p class="role-meta">合伙人 · 2026 – 至今</p>
+      <p class="role-line">用驻场的方式为企业交付 AI 升级，项目制、按结果结算。</p>
+    </li>
+    <li class="role">
+      <h3>Realize 具现</h3>
+      <p class="role-meta">发起人 · 武汉主理人 · 2026 – 至今</p>
+      <p class="role-line">AI 活动执行与资源对接平台，不绑定单一高校。</p>
+    </li>
+    <li class="role">
+      <h3>Linkathon</h3>
+      <p class="role-meta">早期共建者 · 2026.07 – 至今</p>
+      <p class="role-line">黑客松组队社群，零投流 1,700+ 人。</p>
+    </li>
+    <li class="role">
+      <h3>大隆盛游戏</h3>
+      <p class="role-meta">联合创始人 · 2025.05 – 至今</p>
+      <p class="role-line">8 人独立游戏团队，首作已上 Steam。</p>
+    </li>
+  </ul>
+  <p class="partners"><span class="label">合作过</span>Datawhale · 武汉开源聚变人工智能研究院 · 模态空间 · 观猹</p>
+  <h3 class="sub-title">公开仓库</h3>
+  <ul class="repos">
+    <li class="repo">
+      <a href="https://github.com/Robin-fang611/world-sage" target="_blank" rel="noopener">world-sage<span class="arrow" aria-hidden="true">→</span></a>
+      <p>检索增强的智能体预设：世界知识 72.5% → 82.5%（CulturalBench，仓库自报）</p>
+    </li>
+    <li class="repo">
+      <a href="https://github.com/Robin-fang611/vision-bridge-hook" target="_blank" rel="noopener">vision-bridge-hook<span class="arrow" aria-hidden="true">→</span></a>
+      <p>给 DeepSeek 装上眼睛：自动触发的视觉桥接 Hook</p>
+    </li>
+    <li class="repo">
+      <a href="https://github.com/Robin-fang611/wuhan-food-map" target="_blank" rel="noopener">wuhan-food-map<span class="arrow" aria-hidden="true">→</span></a>
+      <p>武汉美食地图：财大周边 + 全城，在线运行</p>
+    </li>
+    <li class="repo">
+      <a href="https://github.com/Robin-fang611/echoes-of-yesterday" target="_blank" rel="noopener">echoes-of-yesterday<span class="arrow" aria-hidden="true">→</span></a>
+      <p>阿尔茨海默照护题材的叙事互动游戏</p>
+    </li>
+  </ul>
+</section>
+      <section class="sec" id="method" aria-labelledby="method-title">
+  <header class="sec-head">
+    <span class="seal seal-sm" aria-hidden="true">05</span>
+    <h2 id="method-title">方法</h2>
+    <p class="sec-kicker">四条能被执行、也能被反驳的工作原则。</p>
+  </header>
+  <ol class="methods">
+    <li class="method">
+      <h3><span class="n">01</span>先驻场，再谈方案</h3>
+      <p>不到现场，看到的都是别人想让你看到的流程。</p>
+    </li>
+    <li class="method">
+      <h3><span class="n">02</span>先量基线，再谈 ROI</h3>
+      <p>没有基线的「效率提升」都是自嗨。</p>
+    </li>
+    <li class="method">
+      <h3><span class="n">03</span>用机制代替人力</h3>
+      <p>组队、内容、交付都做成流水线，系统自己转，人不盯着。</p>
+    </li>
+    <li class="method">
+      <h3><span class="n">04</span>把 AI 当镜子，不当裁判</h3>
+      <p>关键判断主动找反方意见，不听顺耳的。</p>
+    </li>
+  </ol>
+</section>
+      <section class="sec" id="questions" aria-labelledby="questions-title">
+  <header class="sec-head">
+    <span class="seal seal-sm" aria-hidden="true">06</span>
+    <h2 id="questions-title">议题</h2>
+    <p class="sec-kicker">三件我还在想的事。判断会过时，依据可以核对。</p>
+  </header>
+  <ol class="questions">
+    <li class="question">
+      <h3><span class="n">a</span>AI 应用的价值在编排层</h3>
+      <p>模型会商品化，护城河在工作流、数据和组织习惯。所以我把赌注放在交付，而不是模型。</p>
+    </li>
+    <li class="question">
+      <h3><span class="n">b</span>一人公司不是情怀，是分工变了</h3>
+      <p>OpenAI 分析 80 万条工作消息：43.5% 的岗位查询在干另一个职业的活，交叉最密处正是营销 × 工程。</p>
+    </li>
+    <li class="question">
+      <h3><span class="n">c</span>获客入口正在换底层</h3>
+      <p>AI 搜索结果页出现率一年内从 15% 到 43%，竞争从「我排第几」变成「AI 会不会引用我」。</p>
+    </li>
+  </ol>
+</section>
     </div>
   </div>
-
-  <!-- ============ 战绩 ============ -->
-  <section id="numbers">
-    <div class="wrap">
-      <div class="sec-head rv">
-        <div class="sec-idx playfair">02</div>
-        <div><div class="sec-title kai">战绩数字</div><div class="sec-label">By the numbers</div></div>
+  <section class="contact" id="contact" aria-labelledby="contact-title">
+  <div class="wrap contact-in">
+    <div class="contact-main">
+      <span class="seal seal-sm" aria-hidden="true">07</span>
+      <h2 id="contact-title">一起把 AI 用到<br />有人真的在用的地方。</h2>
+      <p class="contact-lead">我在武汉和深圳两地，大三在读（2028 届）。下面三类事，任意一类都可以直接找我；不确定算哪类，也可以先聊 20 分钟。</p>
+      <div class="contact-actions">
+        <a class="btn" href="mailto:weiyangfang950@gmail.com" data-copy="weiyangfang950@gmail.com" data-copied="已复制" data-fail="复制失败，请手动选择">复制邮箱</a>
+        <a class="link link-dark" href="mailto:weiyangfang950@gmail.com">weiyangfang950@gmail.com</a>
       </div>
-      <div class="stats">
-        <div class="stat hot rv"><div class="num playfair" data-n="1600">0<small>+</small></div><p>人 · 黑客松组队社群，全国同类最大</p></div>
-        <div class="stat rv" style="--d:.06s"><div class="num playfair" data-n="4">0<small> 个</small></div><p>物流场景垂直 FDE 项目已落地</p></div>
-        <div class="stat rv" style="--d:.12s"><div class="num playfair" data-n="150">0<small>万+</small></div><p>带领团队完成的 3000 人私域端销售额</p></div>
-        <div class="stat rv"><div class="num playfair" data-n="500">0<small> 人/周</small></div><p>单周建成核心社群，精准度 85%</p></div>
-        <div class="stat rv" style="--d:.06s"><div class="num playfair" data-n="30">0<small>%</small></div><p>驻场客户运营效率提升</p></div>
-        <div class="stat rv" style="--d:.12s"><div class="num playfair" data-n="5">0<small>万+</small></div><p>单场校园 AI 黑客松曝光</p></div>
-        <div class="stat rv"><div class="num playfair" data-n="30">0<small>+</small></div><p>单场活动现场产出的 AI 作品</p></div>
-        <div class="stat rv" style="--d:.06s"><div class="num playfair" data-n="10">0<small> 所+</small></div><p>单场活动联动的高校社团与社区</p></div>
-        <div class="stat rv" style="--d:.12s"><div class="num playfair" data-n="100">0<small>%</small></div><p>工作室首款 Steam 作品好评率</p></div>
-      </div>
+      <p class="copy-status" role="status" aria-live="polite"></p>
+      <p class="contact-wechat">微信 weiyangfang950</p>
     </div>
-  </section>
-
-  <!-- ============ 经历 ============ -->
-  <section id="exp">
-    <div class="wrap">
-      <div class="sec-head rv">
-        <div class="sec-idx playfair">03</div>
-        <div><div class="sec-title kai">经历</div><div class="sec-label">Experience · 客户与机构已脱敏</div></div>
-      </div>
-      <div class="xp-chap rv"><i>CH.01</i><span>企业交付 · FDE</span></div>
-      <div class="xp rv"><div class="xp-when mono">2026 – 至今<b>合伙人</b></div>
-        <div><h3>云天远略（深圳）</h3><div class="role">项目制合伙人 · FDE 业务主体</div>
-          <ul><li>以"驻场合伙人"形态为企业交付 AI 升级，把 Agentic 能力带进真实业务与营销场景</li>
-              <li>累计 4 个物流场景的垂直 FDE 项目已落地</li></ul></div></div>
-      <div class="xp rv"><div class="xp-when mono">2026.05 – 至今<b>项目制合伙人 FDE</b></div>
-        <div><h3>华南某国际货运代理公司 · 旗舰案例</h3><div class="role">驻场调研 · 工作流搭建 · 闭环推进</div>
-          <ul><li>梳理货代全流程，识别 AI 提效真实痛点</li>
-              <li>核心流程 AI 化，效率提升 30%，同等人力多接订单</li>
-              <li>OPC-FDE（一人公司 × 前置部署工程师）模式首个实地验证</li></ul></div></div>
-
-      <div class="xp-chap rv"><i>CH.02</i><span>AI 社群</span></div>
-      <div class="xp rv"><div class="xp-when mono">2026.07 – 至今<b>发起人</b></div>
-        <div><h3>Linkathon · 全国头部黑客松组队社群</h3><div class="role">从 0 到 1 · 机制设计 · 深度链接</div>
-          <ul><li>三大圈层社群 1600+ 人，零投流做到全国同类最大</li>
-              <li>接龙 → 话题讨论 → 标签破冰 → 自由组队的机制流水线</li>
-              <li>台风天仍跨城赴约的零商业线下见面会</li></ul></div></div>
-      <div class="xp rv"><div class="xp-when mono">2026.04 – 05<b>站点发起人</b></div>
-        <div><h3>抖音校园 AI 创变者计划 · 校园赛</h3><div class="role">独立操盘 · 资源联动</div>
-          <ul><li>组建 10 人核心团队，落地百人规模校园黑客松</li>
-              <li>谈下平台独家赞助，联动武汉 10+ 高校社团</li>
-              <li>曝光 5 万+，报名 200+，现场产出 30+ 件作品</li></ul></div></div>
-
-      <div class="xp-chap rv"><i>CH.03</i><span>游戏</span></div>
-      <div class="xp rv"><div class="xp-when mono">2025.05 – 至今<b>联合创始人</b></div>
-        <div><h3>大隆盛游戏</h3><div class="role">项目管理 · AI 研发管线</div>
-          <ul><li>非技术背景带 8 人团队，《浮华工造·千机百炼》上 Steam：好评率 100%，玩家 2500+</li>
-              <li>牵头搭建 AI 研发管线：效率 +40%，交付周期 -25%，人力成本 -20%</li>
-              <li>新作《昨日重现》：阿尔茨海默照护题材叙事游戏，抖音黑客松 top30</li></ul></div></div>
-
-      <div class="xp-chap rv"><i>CH.04</i><span>支线与早期</span></div>
-      <div class="xp rv"><div class="xp-when mono">2026.07 – 08<b>独立开发运营</b></div>
-        <div><h3>财大校园产品 · LinkYou × 美食地图</h3><div class="role">产品从 0 到 1</div>
-          <ul><li>新生手册 LinkYou 上线，服务 2026 级入学</li>
-              <li>美食地图收录数百门店，云端真实运行</li>
-              <li>"手册引流 → 社群 → 消费决策"闭环，CPS 分润模式设计中</li></ul></div></div>
-      <div class="xp rv"><div class="xp-when mono">2025.07 – 09<b>市场营销实习</b></div>
-        <div><h3>武汉某教育科技公司</h3><div class="role">社群从 0 到 1 · 私域转化</div>
-          <ul><li>单周建成 500 人、85% 精准度核心社群，私域突破 3000 人</li>
-              <li>搭建"引流 → 培育 → 转化"链路，带领团队完成私域销售 150 万+，超额达标</li></ul></div></div>
-      <div class="xp rv"><div class="xp-when mono">持续<b>开源与内容</b></div>
-        <div><h3>Open Source &amp; Content</h3><div class="role">用作品建立可信度</div>
-          <ul><li>vision-bridge-hook：给 DeepSeek 装上眼睛，已开源</li>
-              <li>World Sage：检索增强预设，世界知识 72.5% → 82.5%（CulturalBench）</li>
-              <li>WorkBuddy 263 邮件 Skill 社区组件 · 跨智能体协作规范（AGENTS.md）起草</li>
-              <li>《零基础 Vibe Coding 实战营》：不写代码做出第一个上线网站</li></ul></div></div>
-      <div class="xp rv"><div class="xp-when mono">更早<b>其他</b></div>
-        <div><h3>早期投资机构 × 世界 500 强校园俱乐部</h3><div class="role">合伙人助理 · 主席</div>
-          <ul><li>拓展投资机构 60+，项目对接周期 90 天 → 45 天</li>
-              <li>协助完成百万级融资对接</li></ul></div></div>
+    <div class="contact-side">
+      <ul class="requests">
+        <li>
+          <p class="req-label">合作 · 驻场交付</p>
+          <p class="req-text">传统企业（物流、制造、专业服务）想把 AI 落进流程，需要有人到现场把方案做成能用的系统。</p>
+        </li>
+        <li>
+          <p class="req-label">工作 · 增长 / 产品</p>
+          <p class="req-text">AI 应用公司需要能同时听懂业务和产品的人；可实习，也可以谈更长期的合作。</p>
+        </li>
+        <li>
+          <p class="req-label">社群 · 活动与内容</p>
+          <p class="req-text">黑客松、校园 AI 活动、开发者社群的内容与资源合作。</p>
+        </li>
+      </ul>
+      <p class="label socials-label">社交</p>
+      <ul class="socials">
+        <li><a href="https://github.com/Robin-fang611" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://www.xiaohongshu.com/user/profile/685b590b000000001b021d86" target="_blank" rel="noopener">小红书</a></li>
+        <li><a href="https://www.douyin.com/user/self?from_tab_name=main" target="_blank" rel="noopener">抖音</a></li>
+        <li><a href="https://space.bilibili.com/1340728968" target="_blank" rel="noopener">Bilibili</a></li>
+        <li><a href="https://x.com/Robin126988" target="_blank" rel="noopener">X</a></li>
+      </ul>
+      <p class="contact-note">通常 24 小时内回复。</p>
     </div>
-  </section>
-
-  <!-- ============ 合作与生态 ============ -->
-  <section id="eco">
-    <div class="wrap">
-      <div class="sec-head rv">
-        <div class="sec-idx playfair">04</div>
-        <div><div class="sec-title kai">合作与生态</div><div class="sec-label">Partnerships &amp; Ecosystem</div></div>
-      </div>
-      <div class="eco-grid">
-        <div class="eco-card rv">
-          <div class="tag">Founder · Wuhan Lead</div><h3 class="kai">Realize（具现）</h3>
-          <div class="role">发起人 · 武汉主理人 · 2026 – 至今</div>
-          <p>武汉发起、辐射全国的 AI 活动执行与资源对接平台，不绑定单一高校。通过高频稳定的联系，把 AI 创造者推进真实场景：开源项目、商业合作、实习、创业。财大AI社团正在筹办，作为具现的校内落地端口。</p>
-        </div>
-        <div class="eco-card rv" style="--d:.12s">
-          <div class="tag">Co-initiator · Partner community</div><h3 class="kai">Linkathon</h3>
-          <div class="role">联合发起人 · 合作组织 · 2026 – 至今</div>
-          <p>链接 AI 创造者与真实场景的组队社群：一个半月、零投流做到 1600+ 人，全国同类最大，目标半年 1 万人。我的角色是资源整合——把谈到的平台、社区、场地资源打包带进来，换成联合活动、校园落地和资源互换。</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ 校内 ============ -->
-  <section id="campus">
-    <div class="wrap">
-      <div class="sec-head rv">
-        <div class="sec-idx playfair">05</div>
-        <div><div class="sec-title kai">校内</div><div class="sec-label">On campus</div></div>
-      </div>
-      <p class="campus-line kai rv">校园里的身份很简单：<em>FMA 国际金融管理协会前会长</em>，任内发起协会的 AI 转型，把智能体工具链引进了协会的日常运营与活动生产。</p>
-    </div>
-  </section>
-
-  <!-- ============ 我的方法（格言横卷）============ -->
-  <section id="way">
-    <div class="wrap">
-      <div class="sec-head rv">
-        <div class="sec-idx playfair">06</div>
-        <div><div class="sec-title kai">我的方法</div><div class="sec-label">How I work · 三条线共用的一套打法</div></div>
-      </div>
-      <div class="ways">
-        <div class="way rv"><i class="no mono">01</i>
-          <div><h3 class="kai">先<em>驻场</em>，再谈方案</h3>
-          <p>不到现场，看到的都是别人想让你看到的流程。</p></div></div>
-        <div class="way rv"><i class="no mono">02</i>
-          <div><h3 class="kai">用<em>机制</em>代替人力</h3>
-          <p>组队机制、内容状态机、数据闸门——让系统自己转，而不是靠人盯。</p></div></div>
-        <div class="way rv"><i class="no mono">03</i>
-          <div><h3 class="kai">先量<em>基线</em>，再谈 ROI</h3>
-          <p>没有基线的「效率提升」都是自嗨。</p></div></div>
-        <div class="way rv"><i class="no mono">04</i>
-          <div><h3 class="kai">把 AI 当<em>镜子</em>，不当裁判</h3>
-          <p>关键判断主动求反方意见，不顺言。</p></div></div>
-        <div class="way rv"><i class="no mono">05</i>
-          <div><h3 class="kai">非技术是<em>桥梁</em>，不是短板</h3>
-          <p>连接开发者与业务方、把需求翻译成产品，这本身就是核心能力。</p></div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ 思考 ============ -->
-  <section id="think">
-    <div class="wrap">
-      <div class="sec-head rv">
-        <div class="sec-idx playfair">07</div>
-        <div><div class="sec-title kai">我在思考什么</div><div class="sec-label">Thinking · 执行力可以被替代，判断力不行</div></div>
-      </div>
-      <div class="thinks">
-        <div class="think rv"><h3><i>a.</i>获客入口正在换底层</h3>
-          <p>AI 搜索结果页出现率一年内 15% → 43%，竞争维度从「我排第几」变成「AI 会不会引用我」。</p></div>
-        <div class="think rv" style="--d:.08s"><h3><i>b.</i>AI 应用的价值在编排层</h3>
-          <p>模型会商品化，护城河在编排、数据与工作流。这也是我押 FDE 而非押模型的原因。</p></div>
-        <div class="think rv"><h3><i>c.</i>一人公司不是情怀，是有数据的</h3>
-          <p>OpenAI 分析 80 万条工作消息：43.5% 的岗位查询在干另一个职业的活，交叉最密处正是营销 × 工程。</p></div>
-        <div class="think rv" style="--d:.08s"><h3><i>d.</i>AI 顶执行，不顶判断</h3>
-          <p>单人的不可替代性押在业务理解、方案判断、关系信任上，而不是「我一个人能写完代码」。</p></div>
-        <div class="think rv" style="grid-column:1/-1"><h3><i>e.</i>获客方式要提前想清楚</h3>
-          <p>目前靠驻场 + 关系 + 一页纸 BP，几乎零付费；规模化时用营销组合建模测每个渠道的真实 ROI，避免线性误判。</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ 联系 ============ -->
-  <section id="contact">
-    <div class="wrap">
-      <p class="eyebrow rv">Contact</p>
-      <h2 class="contact-giant kai rv" style="--d:.1s">一起做点实事。
-        <svg id="seal2" viewBox="0 0 80 80" aria-hidden="true" style="width:.52em;height:.52em;vertical-align:baseline;margin-left:.06em">
-          <rect x="3" y="3" width="74" height="74" rx="14" fill="#7E6FA6"/>
-          <text x="40" y="55" text-anchor="middle" font-size="42" fill="#F2EEE6"
-            font-family="LXGW WenKai,Kaiti SC,serif" font-weight="700">房</text>
-        </svg>
-      </h2>
-      <p class="contact-sub rv" style="--d:.2s">我在找：一家 Day-one 就能自我造血的 AI 应用创业公司，我负责市场 + 一部分产品。<br/>
-        如果你在做 AI 落地、需要一个懂业务也懂产品的人去推，或者只是想聊聊增长——欢迎找我。</p>
-      <div class="caps rv" style="--d:.26s">
-        <span class="cap">寻找 Co-Founder</span><span class="cap">独立 FA</span>
-      </div>
-      <a class="btn-solid rv" style="--d:.32s" href="mailto:weiyangfang950@gmail.com">发起一次对话</a>
-      <a class="contact-mail rv" style="--d:.35s" href="mailto:weiyangfang950@gmail.com">weiyangfang950@gmail.com</a>
-      <div style="margin-top:60px;font-size:13.5px"><a class="btn-text" href="https://github.com/Robin-fang611" target="_blank" rel="noopener">GitHub →</a></div>
-    </div>
-  </section>
-  <footer>ROBIN FANG · BUILT WITH AGENT</footer>
+  </div>
+</section>
 </main>
-
-<script>
-/* ================= 核心编排：动画状态 = 滚动位置的纯函数 ================= */
-const RM = matchMedia("(prefers-reduced-motion:reduce)").matches;
-const $ = s => document.querySelector(s);
-
-/* 阶梯帘面板 */
-const panelsBox = $("#panels");
-for(let i=0;i<18;i++){panelsBox.appendChild(document.createElement("i"));}
-const panels=[...panelsBox.children];
-
-/* 底色分场：宣纸 → 暖纸 → 墨池深蓝 → 回宣纸（滚动位置插值） */
-const stops=[
-  ["heroZone",242,238,230],["sweep",237,233,222],["about",237,233,222],
-  ["numbers",242,238,230],["exp",240,236,227],["eco",237,233,222],
-  ["campus",240,236,227],["think",240,236,227],["contact",237,233,222]
-].map(([id,r,g,b])=>[document.getElementById(id),r,g,b]);
-
-const clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
-const lerp=(a,b,t)=>a+(b-a)*t;
-
-let dark=false;
-function frame(){
-  const y=scrollY, vh=innerHeight, doc=document.documentElement;
-  /* 进度墨线 */
-  $("#progress").style.width=(y/(doc.scrollHeight-vh)*100)+"%";
-  /* 章节点 */
-  document.querySelectorAll("#dots a").forEach(d=>{
-    const t=document.getElementById(d.getAttribute("href").slice(1)); if(!t)return;
-    const r=t.getBoundingClientRect();
-    d.classList.toggle("on", r.top<=vh*.4&&r.bottom>vh*.4);
-  });
-  /* 底色插值 */
-  const c=y+vh/2;
-  let i=0; while(i<stops.length-1 && stops[i+1][0].offsetTop+stops[i+1][0].offsetHeight/2<c) i++;
-  const a=stops[i], b=stops[Math.min(i+1,stops.length-1)];
-  const ya=a[0].offsetTop+a[0].offsetHeight/2, yb=b[0].offsetTop+b[0].offsetHeight/2;
-  const t=yb>ya?clamp((c-ya)/(yb-ya),0,1):0;
-  const col=`rgb(${Math.round(lerp(a[1],b[1],t))},${Math.round(lerp(a[2],b[2],t))},${Math.round(lerp(a[3],b[3],t))})`;
-  document.body.style.backgroundColor=col;
-  dark = (a[1]+b[1])/2<80;
-  /* HERO 钉住：文字淡出上移，墨环放大成入口 */
-  const hz=$("#heroZone");
-  if(!RM){
-    const hp=clamp(y/(hz.offsetHeight-vh),0,1);
-    $("#heroCopy").style.opacity=1-hp*1.25;
-    $("#heroCopy").style.transform=`translateY(${-hp*70}px)`;
-    $("#heroCopy").style.pointerEvents=hp>.6?"none":"";
-    const en=$("#enso");
-    en.style.transform=`scale(${1+hp*.9}) translateY(${hp*8}%)`;
-    en.style.opacity=1-hp*1.1;
-  }
-  /* 阶梯帘：对角阶梯扫入 */
-  const sw=$("#sweep");
-  if(!RM){
-    const sp=clamp(y/(sw.offsetHeight-vh),0,1);
-    panels.forEach((p,i)=>{
-      const row=Math.floor(i/6), colI=i%6;
-      const delay=(row*.12+colI*.055);
-      const local=clamp((sp*1.9-delay)/.3,0,1);
-      p.style.transform=`scale(${local})`;
-      p.style.transformOrigin=`${colI<3?100:0}% ${row<1.5?100:0}%`;
-    });
-    const sh=$("#sweepHead"), hp2=clamp((sp-.62)/.18,0,1);
-    sh.style.opacity=hp2; sh.style.transform=`translateY(${(1-hp2)*30}px)`;
-  }
-  requestAnimationFrame(frame);
-}
-requestAnimationFrame(frame);
-
-/* 入场 reveal */
-const io=new IntersectionObserver(es=>es.forEach(e=>{
-  if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}
-}),{threshold:.12});
-document.querySelectorAll(".rv").forEach(el=>io.observe(el));
-
-/* 战绩数字 */
-const nio=new IntersectionObserver(es=>es.forEach(e=>{
-  if(!e.isIntersecting)return; nio.unobserve(e.target);
-  const el=e.target,target=+el.dataset.n,small=el.querySelector("small");
-  const t0=performance.now(),dur=1400;
-  (function tick(t){
-    const p=Math.min((t-t0)/dur,1),v=Math.round(target*(1-Math.pow(1-p,3)));
-    el.innerHTML=v.toLocaleString("en-US")+(small?small.outerHTML:"");
-    if(p<1)requestAnimationFrame(tick);
-  })(t0);
-}),{threshold:.5});
-document.querySelectorAll(".stat .num").forEach(el=>nio.observe(el));
-
-/* 鼠标墨迹拖尾（7 点错峰跟随，宣纸上 multiply、墨池上换色） */
-if(matchMedia("(pointer:fine)").matches && !RM){
-  const N=7,dots=[];
-  for(let k=0;k<N;k++){
-    const d=document.createElement("div");d.className="trail";
-    const s=26-k*3;
-    d.style.width=d.style.height=s+"px";
-    d.style.background=`radial-gradient(circle,rgba(126,111,166,${.32-k*.035}),rgba(143,168,191,${.16-k*.018}) 60%,transparent 70%)`;
-    document.body.appendChild(d);dots.push({el:d,x:innerWidth/2,y:innerHeight/2});
-  }
-  let mx=innerWidth/2,my=innerHeight/2,shown=false;
-  addEventListener("mousemove",e=>{mx=e.clientX;my=e.clientY;
-    if(!shown){dots.forEach(d=>d.el.style.opacity=1);shown=true}});
-  (function loop(){
-    let px=mx,py=my;
-    dots.forEach((d,k)=>{
-      d.x+=(px-d.x)*(.32-k*.035); d.y+=(py-d.y)*(.32-k*.035);
-      d.el.style.transform=`translate(${d.x-13}px,${d.y-13}px)`;
-      px=d.x;py=d.y;
-      d.el.style.mixBlendMode=dark?"screen":"multiply";
-    });
-    requestAnimationFrame(loop);
-  })();
-}
-
-/* Lenis 平滑滚动（CDN 失败则原生，静默降级） */
-(function(){
-  const s=document.createElement("script");
-  s.src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js";
-  s.onload=()=>{ if(window.Lenis && !RM){
-    const lenis=new Lenis({lerp:.09,wheelMultiplier:.7});
-    (function raf(t){lenis.raf(t);requestAnimationFrame(raf)})(0);
-  }};
-  s.onerror=()=>{}; document.head.appendChild(s);
-})();
-</script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=IBM+Plex+Mono:wght@400&display=swap">
+<footer class="footer">
+  <div class="wrap footer-in">
+    <p>© 2026 房钰斌 Robin</p>
+    <p>卷宗 RB-2026 · 更新 2026.10 · 内容来自 src/content/site.mjs · 由构建脚本生成</p>
+    <p><a href="https://github.com/Robin-fang611/Robin-fang611.github.io" target="_blank" rel="noopener">源码<span class="arrow" aria-hidden="true">→</span></a></p>
+  </div>
+</footer>
+<dialog class="dialog" id="toc-dialog" aria-labelledby="toc-dialog-title">
+  <div class="dialog-head">
+    <h2 id="toc-dialog-title">目录</h2>
+    <button class="dialog-close" type="button" data-dialog-close>关闭</button>
+  </div>
+  <ol class="dialog-toc">
+    <li><a href="#summary">01 摘要</a></li>
+    <li><a href="#evidence">02 证据</a></li>
+    <li><a href="#record">03 履历</a></li>
+    <li><a href="#ecosystem">04 生态</a></li>
+    <li><a href="#method">05 方法</a></li>
+    <li><a href="#questions">06 议题</a></li>
+    <li><a href="#contact">07 联系</a></li>
+  </ol>
+</dialog>
+<script src="/assets/site.js" defer></script>
 </body>
 </html>

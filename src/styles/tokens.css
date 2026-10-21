@@ -1,0 +1,88 @@
+/* ============================================================
+   01 TOKENS — 所有视觉值的唯一来源。改这里，不改组件。
+   ============================================================ */
+:root {
+  /* 颜色：纸 / 墨 / 朱砂，3 个色相 */
+  --paper: #F4F0E7;
+  --paper-2: #EAE4D5;
+  --ink: #1C262E;
+  --ink-2: #3A464F;
+  --ink-3: #5E686D;
+  --line: rgba(28, 38, 46, .16);
+  --line-2: rgba(28, 38, 46, .30);
+  --accent: #9B3A2C;
+  --accent-2: #7A2A1F;
+  --on-accent: #FBF6EC;
+  --dark: #172027;
+  --on-dark: #EDE8DB;
+  --on-dark-2: #A9B1B5;
+  --dark-line: rgba(237, 232, 219, .18);
+
+  /* 字体：宋体承担材料感，黑体承担可读性 */
+  --font-serif: "Songti SC", "STSong", "Noto Serif SC", "SimSun", serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+
+  /* 字阶：6 档，比率 ≈1.31 */
+  --fs-1: 17px;
+  --fs-2: 22px;
+  --fs-3: 29px;
+  --fs-4: 38px;
+  --fs-5: 50px;
+  --fs-6: 66px;
+  --lh-tight: 1.1;
+  --lh-title: 1.25;
+  --lh-snug: 1.5;
+  --lh-body: 1.8;
+  --ls-label: .12em;
+
+  /* 间距：9 档用于版式（4px 只做箭头微位移） */
+  --s1: 4px;
+  --s2: 8px;
+  --s3: 12px;
+  --s4: 16px;
+  --s5: 24px;
+  --s6: 32px;
+  --s7: 48px;
+  --s8: 64px;
+  --s9: 96px;
+  --s10: 128px;
+
+  /* 形状与动效 */
+  --r: 2px;
+  --shadow: 0 16px 40px -24px rgba(28, 38, 46, .45);
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  --dur-1: 180ms;
+  --dur-2: 320ms;
+  --dur-3: 600ms;
+
+  /* 版心 */
+  --bar: 64px;
+  --page: 1104px;
+  --pad: 64px;
+  --rail: 176px;
+  --gutter: 48px;
+  --measure: 680px;
+}
+
+@media (max-width: 1179px) {
+  :root {
+    --pad: 48px;
+    --rail: 140px;
+    --gutter: 32px;
+  }
+}
+
+@media (max-width: 899px) {
+  :root {
+    --bar: 56px;
+    --pad: 24px;
+    --gutter: 24px;
+    --measure: 100%;
+    --fs-1: 16px;
+    --fs-2: 20px;
+    --fs-3: 26px;
+    --fs-4: 30px;
+    --fs-5: 38px;
+    --fs-6: 44px;
+  }
+}

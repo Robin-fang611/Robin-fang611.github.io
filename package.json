@@ -1,0 +1,12 @@
+{
+  "name": "robin-homepage",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "卷宗 RB-2026 · Robin 的个人主页：内容单源、静态生成、渐进增强",
+  "scripts": {
+    "build": "node build.mjs",
+    "serve": "node tools/serve.mjs",
+    "review": "node tools/frontend-review/review.mjs http://127.0.0.1:4173/"
+  }
+}
