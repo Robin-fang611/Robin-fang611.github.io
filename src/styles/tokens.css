@@ -64,6 +64,11 @@
   --measure: 680px;
 }
 
+/* 英文页优先用拉丁书籍衬线，中文页仍用宋体 */
+html[lang="en"] {
+  --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Songti SC", serif;
+}
+
 @media (max-width: 1179px) {
   :root {
     --pad: 48px;

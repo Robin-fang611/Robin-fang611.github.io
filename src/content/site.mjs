@@ -54,8 +54,8 @@ export const site = {
     updated: { zh: "更新", en: "Updated" },
     volume: { zh: "卷宗", en: "File" },
     footerNote: {
-      zh: "内容来自 src/content/site.mjs · 由构建脚本生成",
-      en: "Content lives in src/content/site.mjs · generated at build time",
+      zh: "全站由一份内容数据生成",
+      en: "Generated from a single content source",
     },
   },
 
@@ -78,7 +78,7 @@ export const site = {
     eyebrow: { zh: "AI 落地 · 社群 · 游戏", en: "AI delivery · community · games" },
     title: {
       zh: ["把 AI 带到", "业务发生的地方"],
-      en: ["Bringing AI to", "where the work happens"],
+      en: ["Bringing AI to", "where work happens"],
     },
     lede: {
       zh: "我是房钰斌（Robin），市场营销出身，一行代码都不会手写。过去两年只做一件事：站到业务现场，用 AI 把最耗人的环节做掉——货代的报价台、黑客松的组队群、游戏的上线页。",
