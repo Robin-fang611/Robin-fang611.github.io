@@ -6,7 +6,7 @@
   var button = document.querySelector("[data-copy]");
   if (!button) return;
 
-  var status = document.querySelector(".reach__status");
+  var status = document.querySelector(".contact__status");
   var label = button.textContent;
 
   function reset() {
