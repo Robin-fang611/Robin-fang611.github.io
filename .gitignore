@@ -1,2 +1,4 @@
 content.md
 .DS_Store
+out/
+tools/
