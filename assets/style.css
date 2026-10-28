@@ -2,9 +2,9 @@
    房钰斌 · Robin Fang
    编目式极简。零依赖、零请求（除自身资源）、零追踪。
 
-   全部数值来自 tokens，新元素不许引入新数值：
-   字 5 档 12/17/27/43/76 · 间距 7 值 8/16/24/40/64/104/168 · 色 4 个
-   线只出现在没有标题的分隔处。编号已删。
+   数值全部来自 tokens，新元素不许引入新数值：
+   字 5 档 12/17/27/48/76 · 间距 7 值 8/16/24/40/64/104/168 · 色 4 个
+   动效只在首屏一次，之后全静。
    ============================================================ */
 
 :root {
@@ -100,16 +100,27 @@ a { color: inherit; }
   padding-inline: clamp(1.25rem, 4vw, 2.5rem);
 }
 
-/* ---------- 刊头 ---------- */
+/* ---------- 扉页：先确认人，再说什么事 ---------- */
+
+.title {
+  display: grid;
+  grid-template-columns: minmax(0, var(--measure)) minmax(0, 1fr);
+  grid-template-rows: auto auto 1fr auto;
+  column-gap: clamp(2rem, 5vw, 4.5rem);
+  min-height: min(100svh, 60rem);
+  padding-block: var(--s4) var(--s5);
+}
 
 .mast {
   position: relative;
+  grid-column: 1 / -1;
+  grid-row: 1;
   display: flex;
-  align-items: baseline;
   justify-content: space-between;
   gap: var(--s3);
-  padding-block: var(--s4) var(--s3);
+  padding-bottom: var(--s3);
   font-size: var(--t-micro);
+  letter-spacing: 0.04em;
   color: var(--ink-2);
 }
 
@@ -125,52 +136,66 @@ a { color: inherit; }
   animation: draw 900ms var(--ease) 80ms both;
 }
 
+.mast p { margin: 0; }
+
 @keyframes draw { to { transform: scaleX(1); } }
 
-.mast__name { margin: 0; color: var(--ink); letter-spacing: 0.04em; }
-.mast__latin {
-  margin-left: 0.85em;
+.title__who {
+  grid-column: 1;
+  grid-row: 2;
+  padding-top: var(--s6);
+}
+
+h1 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: var(--t-h1);
+  font-weight: 400;
+  line-height: 1.22;
+  letter-spacing: 0;
+}
+
+/* 遮罩：名字从下面升上来。行盒多留 .12em 给宋体的字脚。 */
+.mask {
+  display: inline-block;
+  overflow: hidden;
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+.mask > span { display: block; }
+
+.latin {
+  margin-left: 0.9em;
+  font-family: var(--sans);
   font-size: 0.6875rem;
   letter-spacing: 0.16em;
   color: var(--ink-2);
-}
-.mast__place { margin: 0; letter-spacing: 0.04em; }
-
-/* ---------- 首屏 ---------- */
-
-.open {
-  display: grid;
-  grid-template-columns: minmax(0, var(--measure)) minmax(0, 1fr);
-  gap: clamp(2rem, 5vw, 4.5rem);
-  padding-block: clamp(4.5rem, 13vh, 10.5rem) var(--s6);
+  vertical-align: 0.88em;
 }
 
-.micro {
-  margin: 0;
+.title__age {
+  margin: var(--s2) 0 0;
+  font-size: var(--t-body);
+  color: var(--ink);
+}
+
+.title__school {
+  margin: var(--s1) 0 0;
   font-size: var(--t-micro);
   letter-spacing: 0.04em;
   color: var(--ink-2);
 }
 
-.dot { padding-inline: 0.4em; color: var(--ink-2); }
+.dot { padding-inline: 0.4em; }
 
-h1 {
-  margin: var(--s3) 0 0;
-  font-family: var(--serif);
-  font-size: var(--t-h1);
-  font-weight: 400;
-  line-height: 1.24;
-  letter-spacing: 0;
+/* 1,700 根线。全站第一张图版。 */
+.specimen {
+  grid-column: 2;
+  grid-row: 2;
+  align-self: start;
+  margin: 0;
+  padding-top: calc(var(--s6) + 0.3rem);
 }
-
-.lede {
-  max-width: var(--measure);
-  margin: var(--s3) 0 0;
-  color: var(--ink);
-}
-
-/* 1,700 根线。全站唯一的图。 */
-.specimen { margin: 0; align-self: start; padding-top: 0.35rem; }
 
 .specimen img {
   display: block;
@@ -186,6 +211,27 @@ h1 {
   font-size: var(--t-micro);
   line-height: 1.7;
   letter-spacing: 0.02em;
+  color: var(--ink-2);
+}
+
+.title__foot {
+  grid-column: 1;
+  grid-row: 4;
+}
+
+.title__claim {
+  max-width: 24em;
+  margin: 0;
+  font-family: var(--serif);
+  font-size: var(--t-mid);
+  line-height: 1.55;
+  letter-spacing: 0;
+}
+
+.title__dir {
+  margin: var(--s3) 0 0;
+  font-size: var(--t-micro);
+  letter-spacing: 0.04em;
   color: var(--ink-2);
 }
 
@@ -214,7 +260,6 @@ h1 {
   color: var(--ink);
 }
 
-/* 口径与规模：标签行里的微型注释，给版面加密度。 */
 .row__meta {
   margin-left: 0.9em;
   color: var(--ink-2);
@@ -261,7 +306,6 @@ h1 {
   border-top: 1px solid var(--rule);
 }
 
-/* 收束：全页唯一一条跨栏线，标记文档结束。 */
 .rule--full { width: 100%; }
 
 .claim__item + .claim__item { margin-top: var(--s5); }
@@ -285,13 +329,22 @@ h1 {
   color: var(--ink-2);
 }
 
-/* ---------- 履历 ---------- */
+/* ---------- 履历 + 肖像 ---------- */
 
 .about { padding-bottom: var(--s6); }
 
+.about__grid {
+  display: grid;
+  grid-template-columns: minmax(0, var(--measure)) minmax(0, 1fr);
+  column-gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: end;
+}
+
+.about__list { grid-column: 1; }
+
 .about__row {
   display: grid;
-  grid-template-columns: 5.5rem minmax(0, var(--measure));
+  grid-template-columns: 5.5rem minmax(0, 1fr);
   column-gap: var(--s3);
   padding-block: 0.4rem;
 }
@@ -308,6 +361,31 @@ h1 {
 }
 
 .about__row p:last-child { margin: 0; }
+
+/* 第二张图版。与标本图共用一套图注规则。 */
+.portrait {
+  grid-column: 2;
+  margin: 0;
+  justify-self: start;
+}
+
+.portrait img {
+  display: block;
+  width: 100%;
+  max-width: 16.25rem; /* 260 */
+  height: auto;
+  filter: saturate(0.12) sepia(0.08) contrast(1.05) brightness(1.02);
+  mix-blend-mode: multiply;
+}
+
+.portrait figcaption {
+  max-width: 14rem;
+  margin-top: var(--s2);
+  font-size: var(--t-micro);
+  line-height: 1.7;
+  letter-spacing: 0.02em;
+  color: var(--ink-2);
+}
 
 /* ---------- 联系 ---------- */
 
@@ -389,17 +467,39 @@ h1 {
 
 .foot p { margin: 0; }
 
+/* ---------- 入场：一次，之后全静 ----------
+   隐藏态只存在于 no-preference 内，默认态即终态。
+   reduce 用户、无 CSS 用户、CSS 加载失败的用户都直接拿到完整页面。 */
+
+@media (prefers-reduced-motion: no-preference) {
+  .mask > span   { animation: rise 480ms var(--ease) both; }
+  .latin         { animation: fade 220ms var(--ease) 120ms both; }
+  .title__age    { animation: rise 380ms var(--ease) 200ms both; }
+  .title__school { animation: fade 240ms var(--ease) 280ms both; }
+  .specimen img  { animation: develop 480ms linear 300ms both; }
+  .specimen figcaption { animation: fade 240ms var(--ease) 440ms both; }
+  .title__claim  { animation: rise 420ms var(--ease) 520ms both; }
+  .title__dir    { animation: fade 220ms var(--ease) 660ms both; }
+}
+
+@keyframes rise    { from { translate: 0 0.42em; } }
+@keyframes fade    { from { opacity: 0; } }
+@keyframes develop { from { opacity: 0; } to { opacity: 0.88; } }
+
 /* ---------- 窄屏 ---------- */
 
 @media (max-width: 860px) {
-  .open {
+  .title {
     grid-template-columns: 1fr;
-    gap: var(--s5);
-    padding-block: var(--s6) var(--s6);
+    grid-template-rows: auto;
+    min-height: 0;
+    padding-block: var(--s4) var(--s6);
   }
 
-  .specimen { max-width: 15rem; }
+  .title__who { grid-column: 1; grid-row: 2; padding-top: var(--s6); }
+  .specimen { grid-column: 1; grid-row: 3; padding-top: var(--s5); max-width: 15rem; }
   .specimen img { max-width: 15rem; }
+  .title__foot { grid-column: 1; grid-row: 4; padding-top: var(--s5); }
 
   .row {
     grid-template-columns: 1fr;
@@ -410,14 +510,19 @@ h1 {
   .row__num { grid-row: 2; }
   .row__text { grid-column: 1; grid-row: 3; margin-top: var(--s2); }
 
+  .about__grid { grid-template-columns: 1fr; row-gap: var(--s5); }
+  .about__list { grid-column: 1; }
+  .portrait { grid-column: 1; }
+  .portrait img { max-width: 13rem; }
+
   .about__row { grid-template-columns: 4.5rem minmax(0, 1fr); }
 
   .claim__say { max-width: none; }
 }
 
 @media (max-width: 480px) {
-  /* 10 个字 × 32px = 320px，刚好在 375 视口里不断词。 */
   :root { --t-h1: 2rem; --t-num: 3rem; }
+  .latin { display: block; margin: var(--s1) 0 0; vertical-align: 0; }
   .contact__mail { font-size: 1.125rem; }
   .contact__mail a { overflow-wrap: anywhere; }
 }
@@ -449,13 +554,16 @@ h1 {
 
   .wrap { max-width: none; padding: 0; }
 
-  .open { padding-block: 0 24pt; }
+  .title { min-height: 0; padding-block: 0 var(--s5); }
+  .title__who { padding-top: var(--s5); }
+
   .proof, .claim, .about, .contact { padding-bottom: 24pt; }
 
   .mast::after { background: #000; transform: none; animation: none; }
   .foot { border-top: 1px solid #000; }
 
   .specimen img { opacity: 1; }
+  .portrait img { filter: grayscale(1); mix-blend-mode: normal; }
 
   a { text-decoration: underline; }
   a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 8pt; word-break: break-all; }
