@@ -1,8 +1,7 @@
 /* ============================================================
    房钰斌 · Robin Fang
-   编目式极简。零依赖、零请求（除自身资源）、零追踪。
+   人物特写开篇。零依赖、零请求、零追踪。
 
-   数值全部来自 tokens，新元素不许引入新数值：
    字 5 档 12/17/27/48/76 · 间距 7 值 8/16/24/40/64/104/168 · 色 4 个
    动效只在首屏一次，之后全静。
    ============================================================ */
@@ -21,7 +20,7 @@
   --t-micro: 0.75rem;                              /* 12 */
   --t-body: 1.0625rem;                             /* 17 */
   --t-mid: 1.6875rem;                              /* 27 */
-  --t-h1: clamp(2.125rem, 3.4vw, 3rem);            /* 34 → 48 */
+  --t-h1: clamp(2.25rem, 3.8vw, 3.375rem);         /* 36 → 54 */
   --t-num: clamp(3.25rem, 5.6vw, 4.75rem);         /* 52 → 76 */
 
   --s1: 0.5rem;    /*   8 */
@@ -95,12 +94,12 @@ a { color: inherit; }
 
 .wrap {
   width: 100%;
-  max-width: 64rem;
+  max-width: 72rem;
   margin-inline: auto;
   padding-inline: clamp(1.25rem, 4vw, 2.5rem);
 }
 
-/* ---------- 扉页：先确认人，再说什么事 ---------- */
+/* ---------- 开篇：一个场景，不是一句主张 ---------- */
 
 .title {
   display: grid;
@@ -111,102 +110,99 @@ a { color: inherit; }
   padding-block: var(--s4) var(--s5);
 }
 
-.mast {
-  position: relative;
-  grid-column: 1 / -1;
+.title__id {
+  grid-column: 1;
   grid-row: 1;
-  display: flex;
-  justify-content: space-between;
-  gap: var(--s3);
-  padding-bottom: var(--s3);
+}
+
+.title__who {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.name {
+  margin: 0;
+  font-size: var(--t-micro);
+  letter-spacing: 0.06em;
+  color: var(--ink);
+}
+
+.latin {
+  margin-left: 0.85em;
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+  color: var(--ink-2);
+}
+
+.name__role {
+  margin: 0.35em 0 0;
   font-size: var(--t-micro);
   letter-spacing: 0.04em;
   color: var(--ink-2);
 }
 
-.mast::after {
-  content: "";
-  position: absolute;
-  inset-inline: 0;
-  bottom: 0;
-  height: 1px;
-  background: var(--rule);
-  transform: scaleX(0);
-  transform-origin: left;
-  animation: draw 900ms var(--ease) 80ms both;
-}
-
-.mast p { margin: 0; }
-
-@keyframes draw { to { transform: scaleX(1); } }
-
-.title__who {
-  grid-column: 1;
-  grid-row: 2;
-  padding-top: var(--s6);
-}
-
 h1 {
-  margin: 0;
+  margin: var(--s5) 0 0;
   font-family: var(--serif);
   font-size: var(--t-h1);
   font-weight: 400;
-  line-height: 1.22;
+  line-height: 1.26;
   letter-spacing: 0;
 }
 
-/* 遮罩：名字从下面升上来。行盒多留 .12em 给宋体的字脚。 */
+/* 遮罩：第一行从下面升上来。行盒多留 .12em 给宋体的字脚。 */
 .mask {
-  display: inline-block;
+  display: block;
   overflow: hidden;
   padding-bottom: 0.12em;
   margin-bottom: -0.12em;
 }
 .mask > span { display: block; }
 
-.latin {
-  margin-left: 0.9em;
-  font-family: var(--sans);
-  font-size: 0.6875rem;
-  letter-spacing: 0.16em;
+.lede {
+  max-width: 26em;
+  margin: var(--s3) 0 0;
   color: var(--ink-2);
-  vertical-align: 0.88em;
 }
 
-.title__age {
-  margin: var(--s2) 0 0;
-  font-size: var(--t-body);
+.result {
+  margin: var(--s4) 0 0;
+  font-family: var(--serif);
+  font-size: var(--t-mid);
+  line-height: 1.5;
+  letter-spacing: 0;
   color: var(--ink);
 }
 
-.title__school {
-  margin: var(--s1) 0 0;
-  font-size: var(--t-micro);
-  letter-spacing: 0.04em;
-  color: var(--ink-2);
+/* 转折。年龄放在最后，比放在名片上有力。 */
+.turn {
+  grid-column: 1;
+  grid-row: 4;
+  margin: 0;
+  font-family: var(--serif);
+  font-size: var(--t-mid);
+  line-height: 1.5;
+  letter-spacing: 0;
+  color: var(--ink);
 }
 
-.dot { padding-inline: 0.4em; }
-
-/* 1,700 根线。全站第一张图版。 */
-.specimen {
+.portrait {
   grid-column: 2;
-  grid-row: 2;
+  grid-row: 1 / span 2;
   align-self: start;
   margin: 0;
-  padding-top: calc(var(--s6) + 0.3rem);
 }
 
-.specimen img {
+.portrait img {
   display: block;
   width: 100%;
-  max-width: 20rem;
+  max-width: 26.5rem;
   height: auto;
-  opacity: 0.88;
+  filter: saturate(0.3) sepia(0.06) contrast(1.03);
+  mix-blend-mode: multiply;
 }
 
-.specimen figcaption {
-  max-width: 14rem;
+.portrait figcaption {
   margin-top: var(--s2);
   font-size: var(--t-micro);
   line-height: 1.7;
@@ -214,33 +210,14 @@ h1 {
   color: var(--ink-2);
 }
 
-.title__foot {
-  grid-column: 1;
-  grid-row: 4;
-}
-
-.title__claim {
-  max-width: 24em;
-  margin: 0;
-  font-family: var(--serif);
-  font-size: var(--t-mid);
-  line-height: 1.55;
-  letter-spacing: 0;
-}
-
-.title__dir {
-  margin: var(--s3) 0 0;
-  font-size: var(--t-micro);
-  letter-spacing: 0.04em;
-  color: var(--ink-2);
-}
+.dot { padding-inline: 0.4em; }
 
 /* ---------- 证据 ---------- */
 
 .proof {
   display: grid;
   gap: var(--s5);
-  padding-bottom: var(--s7);
+  padding-top: var(--s6);
 }
 
 .row {
@@ -295,9 +272,30 @@ h1 {
   color: var(--ink);
 }
 
+/* 1,700 根线，横贯版心的一条。全站唯一的纹理。 */
+.band {
+  margin: 0;
+  padding-top: var(--s4);
+}
+
+.band img {
+  display: block;
+  width: 100%;
+  height: auto;
+  opacity: 0.92;
+}
+
+.band figcaption {
+  margin-top: var(--s2);
+  font-size: var(--t-micro);
+  line-height: 1.7;
+  letter-spacing: 0.02em;
+  color: var(--ink-2);
+}
+
 /* ---------- 判断 ---------- */
 
-.claim { padding-bottom: var(--s6); }
+.claim { padding-block: var(--s7) var(--s6); }
 
 .rule {
   width: 12rem;
@@ -329,22 +327,13 @@ h1 {
   color: var(--ink-2);
 }
 
-/* ---------- 履历 + 肖像 ---------- */
+/* ---------- 履历 ---------- */
 
 .about { padding-bottom: var(--s6); }
 
-.about__grid {
-  display: grid;
-  grid-template-columns: minmax(0, var(--measure)) minmax(0, 1fr);
-  column-gap: clamp(2rem, 5vw, 4.5rem);
-  align-items: end;
-}
-
-.about__list { grid-column: 1; }
-
 .about__row {
   display: grid;
-  grid-template-columns: 5.5rem minmax(0, 1fr);
+  grid-template-columns: 5.5rem minmax(0, var(--measure));
   column-gap: var(--s3);
   padding-block: 0.4rem;
 }
@@ -361,31 +350,6 @@ h1 {
 }
 
 .about__row p:last-child { margin: 0; }
-
-/* 第二张图版。与标本图共用一套图注规则。 */
-.portrait {
-  grid-column: 2;
-  margin: 0;
-  justify-self: start;
-}
-
-.portrait img {
-  display: block;
-  width: 100%;
-  max-width: 16.25rem; /* 260 */
-  height: auto;
-  filter: saturate(0.12) sepia(0.08) contrast(1.05) brightness(1.02);
-  mix-blend-mode: multiply;
-}
-
-.portrait figcaption {
-  max-width: 14rem;
-  margin-top: var(--s2);
-  font-size: var(--t-micro);
-  line-height: 1.7;
-  letter-spacing: 0.02em;
-  color: var(--ink-2);
-}
 
 /* ---------- 联系 ---------- */
 
@@ -468,23 +432,22 @@ h1 {
 .foot p { margin: 0; }
 
 /* ---------- 入场：一次，之后全静 ----------
-   隐藏态只存在于 no-preference 内，默认态即终态。
-   reduce 用户、无 CSS 用户、CSS 加载失败的用户都直接拿到完整页面。 */
+   隐藏态只存在于 no-preference 内，默认态即终态。 */
 
 @media (prefers-reduced-motion: no-preference) {
-  .mask > span   { animation: rise 480ms var(--ease) both; }
-  .latin         { animation: fade 220ms var(--ease) 120ms both; }
-  .title__age    { animation: rise 380ms var(--ease) 200ms both; }
-  .title__school { animation: fade 240ms var(--ease) 280ms both; }
-  .specimen img  { animation: develop 480ms linear 300ms both; }
-  .specimen figcaption { animation: fade 240ms var(--ease) 440ms both; }
-  .title__claim  { animation: rise 420ms var(--ease) 520ms both; }
-  .title__dir    { animation: fade 220ms var(--ease) 660ms both; }
+  .mask > span  { animation: rise 520ms var(--ease) both; }
+  .name         { animation: fade 200ms var(--ease) 80ms both; }
+  .name__role   { animation: fade 200ms var(--ease) 140ms both; }
+  .portrait img { animation: develop 560ms linear 220ms both; }
+  .portrait figcaption { animation: fade 240ms var(--ease) 560ms both; }
+  .lede         { animation: rise 360ms var(--ease) 320ms both; }
+  .result       { animation: rise 400ms var(--ease) 460ms both; }
+  .turn         { animation: fade 240ms var(--ease) 700ms both; }
 }
 
-@keyframes rise    { from { translate: 0 0.42em; } }
+@keyframes rise    { from { translate: 0 0.4em; } }
 @keyframes fade    { from { opacity: 0; } }
-@keyframes develop { from { opacity: 0; } to { opacity: 0.88; } }
+@keyframes develop { from { opacity: 0; } to { opacity: 1; } }
 
 /* ---------- 窄屏 ---------- */
 
@@ -496,10 +459,12 @@ h1 {
     padding-block: var(--s4) var(--s6);
   }
 
-  .title__who { grid-column: 1; grid-row: 2; padding-top: var(--s6); }
-  .specimen { grid-column: 1; grid-row: 3; padding-top: var(--s5); max-width: 15rem; }
-  .specimen img { max-width: 15rem; }
-  .title__foot { grid-column: 1; grid-row: 4; padding-top: var(--s5); }
+  .title__id { grid-column: 1; grid-row: 1; }
+  .portrait { grid-column: 1; grid-row: 2; padding-top: var(--s4); max-width: 18rem; }
+  .title__who { grid-column: 1; grid-row: 3; }
+  .turn { grid-column: 1; grid-row: 4; padding-top: var(--s5); }
+
+  h1 { margin-top: var(--s4); }
 
   .row {
     grid-template-columns: 1fr;
@@ -510,19 +475,14 @@ h1 {
   .row__num { grid-row: 2; }
   .row__text { grid-column: 1; grid-row: 3; margin-top: var(--s2); }
 
-  .about__grid { grid-template-columns: 1fr; row-gap: var(--s5); }
-  .about__list { grid-column: 1; }
-  .portrait { grid-column: 1; }
-  .portrait img { max-width: 13rem; }
-
   .about__row { grid-template-columns: 4.5rem minmax(0, 1fr); }
 
   .claim__say { max-width: none; }
 }
 
 @media (max-width: 480px) {
-  :root { --t-h1: 2rem; --t-num: 3rem; }
-  .latin { display: block; margin: var(--s1) 0 0; vertical-align: 0; }
+  :root { --t-h1: 1.875rem; --t-num: 3rem; }
+  .latin { display: block; margin: 0.3em 0 0; }
   .contact__mail { font-size: 1.125rem; }
   .contact__mail a { overflow-wrap: anywhere; }
 }
@@ -531,7 +491,6 @@ h1 {
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .mast::after { animation: none; transform: none; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
@@ -555,15 +514,14 @@ h1 {
   .wrap { max-width: none; padding: 0; }
 
   .title { min-height: 0; padding-block: 0 var(--s5); }
-  .title__who { padding-top: var(--s5); }
+  .proof { padding-top: var(--s5); }
+  .claim { padding-block: 24pt; }
+  .about, .contact { padding-bottom: 24pt; }
 
-  .proof, .claim, .about, .contact { padding-bottom: 24pt; }
-
-  .mast::after { background: #000; transform: none; animation: none; }
   .foot { border-top: 1px solid #000; }
 
-  .specimen img { opacity: 1; }
   .portrait img { filter: grayscale(1); mix-blend-mode: normal; }
+  .band img { opacity: 1; }
 
   a { text-decoration: underline; }
   a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 8pt; word-break: break-all; }
