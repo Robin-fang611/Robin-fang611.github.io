@@ -1617,19 +1617,57 @@ html:has(.reduce-motion) {
   }
 }
 .paper {
+  display:block;
   text-align:left;
   color:var(--ink);
-  transition:transform .7s var(--ease),border-color .3s,box-shadow .3s
+  transition:transform .7s var(--ease),border-color .3s,box-shadow .3s,background-color .3s
 }
-.paper[aria-pressed=true] {
-  border-color:#5b9084;
-  box-shadow:5px 10px 22px #204b431c
+.paper em {
+  position:absolute;
+  top:10px;
+  right:12px;
+  font-style:normal;
+  font-size:11px;
+  color:var(--teal);
+  opacity:0;
+  transform:translate(-3px,3px);
+  transition:opacity .3s,transform .3s
 }
 .paper:hover {
-  border-color:#5b9084
+  border-color:#5b9084;
+  background:#fbfcf8;
+  box-shadow:8px 16px 28px #204b431c
+}
+.paper:hover em,.paper:focus-visible em {
+  opacity:1;
+  transform:none
 }
 .paper:focus-visible {
-  z-index:3
+  z-index:3;
+  outline-offset:4px
+}
+.paper-one:hover,.paper-one:focus-visible {
+  transform:rotate(-10deg) translateY(-6px)
+}
+.paper-two:hover,.paper-two:focus-visible {
+  transform:rotate(1deg) translateY(-6px)
+}
+.paper-three:hover,.paper-three:focus-visible {
+  transform:rotate(10deg) translateY(-6px)
+}
+@media(prefers-reduced-motion:reduce) {
+  .paper,.paper em {
+    transition:none
+  }
+  .paper-one:hover,.paper-one:focus-visible {
+    transform:rotate(-13deg)
+  }
+  .paper-two:hover,.paper-two:focus-visible {
+    transform:rotate(3deg)
+  }
+  .paper-three:hover,.paper-three:focus-visible {
+    transform:rotate(13deg)
+  }
 }
 .flow-result {
   min-width:245px

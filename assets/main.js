@@ -60,19 +60,6 @@ if ('IntersectionObserver' in window) {
  $$('.reveal').forEach(el => { if (!reduce && el.getBoundingClientRect().top > innerHeight) el.classList.add('pending'); observer.observe(el); });
 }
 
-const flowCopy = {
- mail: ['从邮件中找出询价要素', '航线 · 货物 · 时间 → 人工确认'],
- rate: ['把不同报价放在一起核对', '费用项目 · 有效期 → 人工确认'],
- docs: ['减少单证里的重复录入', '提取字段 · 核对缺项 → 人工确认']
-};
-$('#flow-instruction').textContent = '流程示意 · 点选纸页，了解处理思路';
-$$('[data-flow]').forEach(b => { b.disabled = false; });
-$$('[data-flow]').forEach(button => button.addEventListener('click', () => {
- $$('[data-flow]').forEach(b => b.setAttribute('aria-pressed', String(b === button)));
- const [title, description] = flowCopy[button.dataset.flow];
- $('.flow-result span').textContent = title; $('.flow-result small').textContent = description;
-}));
-
 const topics = {
  'AI 与业务': ['有一道重复的工作流程，想聊聊 AI 能不能帮上忙。', '我想聊聊 AI 与业务', 'Robin，你好！\n\n我所在的行业是：\n目前反复遇到的问题是：\n希望与你聊聊：\n'],
  '黑客松与合作': ['想一起办一场活动，或让合适的创造者认识彼此。', '想聊聊黑客松与合作', 'Robin，你好！\n\n我们正在做的活动或项目是：\n希望一起尝试的是：\n'],
